@@ -1,0 +1,27 @@
+.center {
+    display: grid;
+    grid-gap: 30px;
+  
+    .blog {
+      grid-column: 2/3;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 100%;
+  
+      .blog-title {
+        grid-row: 1/2;
+        margin: 10px 0;
+      }
+  
+      .blog-timestamp {
+        grid-row: 2/3;
+        margin: 0 0 10px 0;
+      }
+  
+      .blog-content {
+        grid-row: 3/4;
+      }
+    }
+  }
+  

@@ -1,0 +1,15 @@
+.right-rail {
+  .right-rail-top,
+  .right-rail-middle {
+    display: grid;
+
+    .right-rail-content li {
+      list-style-type: none;
+      margin: 10px 0;
+    }
+  }
+
+  .right-rail-middle {
+    margin-top: 50px;
+  }
+}

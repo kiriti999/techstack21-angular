@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "techstack21-angular"
+  "defaultProject": "techstack21-angular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

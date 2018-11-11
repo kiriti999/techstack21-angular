@@ -1,0 +1,32 @@
+<div class="center">
+
+  <div class="blog">
+      <div class="blog-title">Node modules version issue with heroku app</div>
+      <div class="blog-timestamp">By techstack21 on 2018-07-01</div>
+      <div class="blog-content"> In some cases, when you create a pull request, you might end up having merge conflicts and to resolve it you use "git pull" into your local branch and some how you remove a folder/file, then resolve the conflicts and merge back to remote branch.
+
+        Imagine what would happen? You might end up deleting files/folder in the remote branch as well. Why? because when you do a git pull (which is git fetch and then git merge), it rewrites the index history in your local branch as well.
+        
+        Some of issues using git pull:
+        
+        it introduces unnecessary nonlinearities in the history
+        it makes it easy to accidentally reintroduce commits that were intentionally rebased out upstream
+        it modifies your working directory in unpredictable ways
+        pausing what you are doing to review someone else's work is annoying with git pull
+        it makes it hard to correctly rebase onto the remote branch
+        it doesn't clean up branches that were deleted in the remote repo
+        
+        A Better Alternative: Use git up instead of git pull
+        
+        Instead of git pull, I recommend using the following git fast forward like this:
+        git config --global alias.up 'pull --ff-only --all -p'
+        
+        
+        In Git 2.0, you can use:
+        git config --global pull.ff only
+        
+        
+        This alias downloads all of the latest commits from all upstream branches (pruning the dead branches) and tries to fast-forward the local branch to the latest commit on the upstream branch. If successful, then there were no local commits, so there was no risk of merge conflict. The fast-forward will fail if there are local (unpushed) commits, giving you an opportunity to review the upstream commits before taking action.</div>
+  </div>
+
+</div>
