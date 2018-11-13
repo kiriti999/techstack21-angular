@@ -19,7 +19,7 @@ let authController = {
             role: "ROLE_ADMIN"
         };
 
-        res.send(user);
+        // res.send(user);
     },
 
     googleResponse: function () {
