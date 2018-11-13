@@ -5,8 +5,8 @@ module.exports = {
     admins: ['kiriti.k999@gmail.com', 'techstack21@gmail.com', 'techstack21@outlook.com', 'techstack21@outlook.com', 'techstack21@hotmail.com'],
 
     google: {
-        clientID: "348308192190-2qt7m0fdfalqi6kgqu4ui0lkp1igaarq.apps.googleusercontent.com",
-        clientSecret: "Cm94wNw3AvxeRFaRqdUIBBWp"
+        clientID: "1052712509031-ejf42d640evdphia01sh1205evfvnr42.apps.googleusercontent.com",
+        clientSecret: "CZp0GrJ3_Dyl_cnpZt2nt2kE"
     },
 
     facebook: {

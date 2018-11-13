@@ -6,7 +6,7 @@ var OAuth2 = google.auth.OAuth2;
 var analytics = google.analyticsreporting("v4");
 var plus = google.plus('v1');
 var blogger = google.blogger('v3');
-var commons = require('../public_html/commons.json').commons;
+var config = require('../config/config.json').props;
 const popupTools = require('popup-tools');
 
 
@@ -86,7 +86,7 @@ social_sharing.post('/sharePost', function (req, res, next) {
 //             oauth2Client.setCredentials(tokens);
 
 //             var options = {
-//                 uri: 'https://www.googleapis.com/blogger/v3/blogs/'+commons.google_blogger.id+'/posts/',
+//                 uri: 'https://www.googleapis.com/blogger/v3/blogs/'+config.google_blogger.id+'/posts/',
 //                 method: 'POST',
 //                 body: social_sharing.blogParams,
 //                 headers: {
@@ -133,7 +133,7 @@ social_sharing.post('/sharePost', function (req, res, next) {
 //LINKEDIN SHARING START
 //==================================
 var Linkedin = require('node-linkedin')('81qr39kkcl6srr', '7OhisqIt4POtuowV');
-social_sharing.get('/shareToLinked', techstack21_Security.isAuthenticated, function (req, res, next) {
+social_sharing.get('/shareToLinked', function (req, res, next) {
 
     var linkedIn = {
         auth: '',
@@ -189,7 +189,7 @@ social_sharing.get('/shareToLinked', techstack21_Security.isAuthenticated, funct
         });
 });
 // Again, `res` is optional, you could pass `code` as the first parameter
-social_sharing.get('/auth/linkedin/callback', techstack21_Security.isAuthenticated, function (req, res) {
+social_sharing.get('/auth/linkedin/callback', function (req, res) {
     console.log('LINKEDIN CALLBACK CALLED');
     Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function (err, results) {
         if (err)

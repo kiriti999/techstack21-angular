@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var UserSchema = new mongoose.Schema({
     // email: {
@@ -14,12 +15,8 @@ var UserSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    profilePhoto: {
-        type: String
-    },
-    role: {
-        type: String
-    },
+    profilePhoto: String,
+    role: String,
     googleId: {
         type: String,
         required: true,
@@ -37,7 +34,19 @@ var UserSchema = new mongoose.Schema({
     //   type: String,
     //   required: true,
     // }
-});
+}, { timestamps: true });
+
+UserSchema.methods.setPassword = function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+};
+
+UserSchema.methods.validPassword = function(password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+    return this.hash === hash;
+};
+
+UserSchema.plugin(uniqueValidator, { message: 'is already taken.' });
 
 //authenticate input against database
 UserSchema.statics.authenticate = function (email, password, callback) {
@@ -73,5 +82,4 @@ UserSchema.statics.authenticate = function (email, password, callback) {
 // });
 
 
-var User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);;

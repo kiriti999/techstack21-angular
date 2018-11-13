@@ -1,6 +1,6 @@
 
 const getRouter = require('express').Router();
-var riot = require('riot');
+// var riot = require('riot');
 var userModel = require('../schemas/user');
 var articleModel = require('../schemas/article');
 var categoryModel = require('../schemas/categories');
@@ -18,9 +18,7 @@ getRouter.get('/deleteTopic/:deleteId', deleteTopic);
 getRouter.get('/article*', loadByUrl);
 getRouter.get('/get_post_by_category/:name', getPostByCategory);
 getRouter.get('/logout', logout);
-getRouter.get('/linkedInQueryString', function (req, res) {
-    res.redirect('/#!blog_topic_title/?code=' + req.query.code);
-});
+
 
 var authList = [];
 

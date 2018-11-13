@@ -2,7 +2,6 @@
 const cloudinaryRouter = require('express').Router();
 const cloudinary = require('cloudinary');
 const keys = require('../config/auth_keys');
-const techstack21_Security = require('../serverAuthentication');
 
 cloudinary.config({
     cloud_name: keys.cloudinary.cloud_name,
@@ -10,7 +9,7 @@ cloudinary.config({
     api_secret: keys.cloudinary.clientSecret
 });
 
-cloudinaryRouter.post('/uploadImage', techstack21_Security.isAuthenticated, uploadImage);
+cloudinaryRouter.post('/uploadImage', uploadImage);
 
 function uploadImage(req, res, next) {
     cloudinary.uploader.upload(req.body.imageUrl, function (result) {

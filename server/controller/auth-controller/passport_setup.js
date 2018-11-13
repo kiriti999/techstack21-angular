@@ -1,12 +1,11 @@
 
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var keys = require('./auth_keys');
-var commons = require('../public_html/commons.json').commons;
-var userModel = require('../schemas/user');
+var keys = require('../../config/auth_keys');
+var config = require('../../config/config.json').props;
+var userModel = require('../../schemas/user');
 var nJwt = require('njwt');
-var uuid = require('node-uuid');
 
 passport.serializeUser(function (user, done) {
     console.log('');
@@ -32,15 +31,16 @@ passport.deserializeUser(function (user, done) {
 passport.use(new GoogleStrategy({
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
-    callbackURL: "" + commons.socialLogin_call_back_url + '/auth/google/callback',
+    callbackURL: config.call_back_url_local + '/auth/google/callback',
 },
     function (accessToken, refreshToken, profile, done) {
-
         var claims = {
             sub: 'Social Authentication',
             iss: 'https://www.techstack21.com',
             accessToken: accessToken
         };
+
+        console.log('accessToken ', accessToken);
         var jwt = nJwt.create(claims, keys.session.cookieKey);
         jwt.setExpiration(new Date().getTime() + (60 * 60 * 1000 * 1));
         var token = jwt.compact();
@@ -72,43 +72,26 @@ passport.use(new GoogleStrategy({
                     console.log('');
                     newUser.accessToken = token;
                     done(null, newUser);
-                })
+                });
             }
         });
     }
 ));
 
 
-//facebook strategy
-passport.use(new FacebookStrategy({
-    clientID: keys.facebook.clientID,
-    clientSecret: keys.facebook.clientSecret,
-    callbackURL: "" + commons.socialLogin_call_back_url + "/auth/facebook/callback",
-    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified', 'photos']
-},
-    function (accessToken, refreshToken, profile, done) {
-        console.log("Profile=", profile);
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        console.log('inside local statergy', username);
+        console.log(username, password);
+        password = (Buffer.from(password, 'base64').toString());
+        User.findOne({ email: username }, function (err, user) {
+            console.log('find user ');
+            console.log(err, user);
 
-        USERS[profile.id] = profile;
-        done(null, profile);
-
-        // var primaryUserInfo = {
-        //     username: profile.emails[0].value,
-        //     userImage: profile.photos[0].value,
-        //     token: accessToken
-        // };
-
-        // request({
-        //     url: '' + commons.api_url + '/user_create',
-        //     method: "POST",
-        //     json: true,
-        //     headers: { "content-type": "application/json" },
-        //     body: primaryUserInfo
-        // }, function (err, res, body) {
-        //     if (err == null && body == false) {
-        //     } else {
-        //     }
-        // });
-        // //            return cb(null, accessToken);
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            if (!user.validPassword(password)) { return done(null, false); }
+            return done(null, user);
+        });
     }
 ));

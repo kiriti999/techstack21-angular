@@ -7,7 +7,7 @@ var articleModel = require('../schemas/article');
 var categoryModel = require('../schemas/categories');
 var category_article_model = require('../schemas/category_article_mapping');
 var rp = require('request-promise');
-var commons = require('../public_html/commons.json').commons;
+var config = require('../config/config.json').props;
 var google = require('googleapis');
 var querystring = require("querystring");
 var OAuth2 = google.auth.OAuth2;
@@ -24,7 +24,7 @@ function getLinkedInToken(req, res, next) {
     var params = {
         grant_type: 'authorization_code',
         code: req.body.code,
-        redirect_uri: commons.socialLogin_call_back_url,
+        redirect_uri: config.call_back_url,
         client_id: '81qr39kkcl6srr',
         client_secret: '7OhisqIt4POtuowV'
     };
@@ -215,7 +215,7 @@ function postApiResponse(url, req, next, res) {
 //BLOGGER API - START
 //==================================
 function getOAuthClient() {
-    return new OAuth2(keys.google.clientID, keys.google.clientSecret, commons.socialLogin_call_back_url);
+    return new OAuth2(keys.google.clientID, keys.google.clientSecret, config.call_back_url);
 }
 
 function createGoogleBloggerPost(req, res, next) {
@@ -235,7 +235,7 @@ function createGoogleBloggerPost(req, res, next) {
             oauth2Client.setCredentials(tokens);
 
             var options = {
-                uri: 'https://www.googleapis.com/blogger/v3/blogs/' + commons.google_blogger.id + '/posts/',
+                uri: 'https://www.googleapis.com/blogger/v3/blogs/' + config.google_blogger.id + '/posts/',
                 method: 'POST',
                 body: blogParams,
                 headers: {
