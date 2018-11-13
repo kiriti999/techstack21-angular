@@ -1,5 +1,8 @@
+<app-header></app-header>
+
 <div class="login">
   <div class="login-gmail">
-    <button>Login with Gmail</button>
+    <label for="" class="loginError">{{loginError}}</label>
+    <button (click)="googleLogin()">Login with Gmail</button>
   </div>
 </div>

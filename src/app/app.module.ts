@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'; 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -10,6 +12,7 @@ import { CenterComponent } from './components/center/center.component';
 import { CenterDetailsComponent } from './components/center-details/center-details.component';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { PublicComponent } from './components/public/public.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,14 @@ import { AppRoutingModule } from './/app-routing.module';
     CenterComponent,
     CenterDetailsComponent,
     LoginComponent,
+    PublicComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
