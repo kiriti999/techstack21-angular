@@ -6,10 +6,11 @@ import { GlobalLoginService } from '../shared-services/global-login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   private googleLoginUrl = './auth/google';
   private isUserLogin = './auth/isUserLogin';
+  private signupUrl = './auth/signup';
   private loginUrl = './auth/login';
   private logoutUrl = './auth/logout';
 
@@ -17,7 +18,23 @@ export class LoginService {
 
   login(email: string, password: string) {
     
-    return this.http.post<any>(this.loginUrl, { email, password: window.btoa(password) })
+    return this.http.post<any>(this.loginUrl, { email, password: (window.btoa(password)) })
+        .pipe(map(user => {
+            // login successful if there's a jwt token in the response
+            if (user && user.token) {
+              
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+
+                this._globalLoginService.update(true);
+            }
+              return user;
+          }));
+  }
+
+  signup(email: string, password: string) {
+    
+    return this.http.post<any>(this.signupUrl, { email, password: (window.btoa(password)) })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
@@ -29,21 +46,9 @@ export class LoginService {
           }));
   }
 
-  googleLogin() {
-    // return this.http.get(this.googleLoginUrl);
-    return {
-      role: "ROLE_ADMIN",
-      name: "Kiriti"
-    }
-  }
-
   isLogin() {
     return this.http.get(this.isUserLogin);
   }
-
-  // login(username, password) {
-  //   return this.http.get(this.loginUrl + `?password=${window.btoa(password)}&username=${username}`);
-  // }
 
   logout() {
     return this.http.get(this.logoutUrl);

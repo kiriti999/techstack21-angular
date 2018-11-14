@@ -14,6 +14,8 @@ import { CenterDetailsComponent } from './components/center-details/center-detai
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { PublicComponent } from './components/public/public.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { PublicComponent } from './components/public/public.component';
     CenterDetailsComponent,
     LoginComponent,
     PublicComponent,
+    SignupComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

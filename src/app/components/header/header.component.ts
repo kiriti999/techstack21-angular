@@ -11,15 +11,17 @@ export class HeaderComponent implements OnInit {
   loggedIn: boolean = false;
 
   constructor(private _globalLoginService: GlobalLoginService) {
-    
+
   }
 
   ngOnInit() {
-    if(!localStorage.getItem('loggedIn')){
+    var userId =  ((JSON.parse(localStorage.getItem('currentUser'))||{}).user||{}).id;
+    if (typeof userId == "undefined" || userId == null) {
       this._globalLoginService.globalLogin$.subscribe((value) => {
         this.loggedIn = value;
       });
+    } else {
+      this.loggedIn = true;
     }
   }
-
 }

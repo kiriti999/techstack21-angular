@@ -2,7 +2,7 @@
 
   <li class="menu-item">
     <a class="logo" href="http://www.techstack21.com">
-      <svg viewBox="0 0 394.2502746582031 133.49066162109375"   preserveAspectRatio="xMidYMid meet" class=" logo" id="fbfefdhc">
+      <svg viewBox="0 0 394.2502746582031 133.49066162109375" preserveAspectRatio="xMidYMid meet" class=" logo" id="fbfefdhc">
         <defs id="SvgjsDefs1108"></defs>
         <g id="SvgjsG1109" featurekey="root" fill="#ffffff" transform="matrix(1,0,0,1,0,0)"></g>
         <g id="SvgjsG1110" featurekey="symbol1" fill="#817133" transform="matrix(0.8147267428185547,0,0,0.8147267428185547,12.90207840414703,14.613004874859584)">
@@ -70,7 +70,12 @@
   <li class="menu-item"><a href="/topic/Javascript">Javascript</a></li>
   <li class="menu-item"><a href="/topic/NodeJS">NodeJS</a></li>
   <li class="menu-item"><a href="topic/JQuery">JQuery</a></li>
-  <li class="menu-item" *ngIf="loggedIn">Create Post</li>
+  <li class="menu-item" *ngIf="loggedIn">
+    <a>
+      <span class="create_button btn btn-xs btn-default" id='post_new_topic_btn' data-toggle="modal" data-target="#blog_posting_modal">
+        +Create post</span>
+    </a>
+  </li>
   <li class="menu-item" *ngIf="loggedIn">Logout</li>
 
 </div>
