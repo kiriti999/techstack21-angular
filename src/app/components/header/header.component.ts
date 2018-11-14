@@ -15,9 +15,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._globalLoginService.globalLogin$.subscribe((value) => {
-      this.loggedIn = value;
-    });
+    if(!localStorage.getItem('loggedIn')){
+      this._globalLoginService.globalLogin$.subscribe((value) => {
+        this.loggedIn = value;
+      });
+    }
   }
 
 }
