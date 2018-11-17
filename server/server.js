@@ -19,7 +19,6 @@ var social = require('./social/social_sharing');
 var cloudinaryRouter = require('./routes/cloudinary');
 var getRouter = require('./routes/get_routes');
 var postRouter = require('./routes/post_routes');
-require('./controller/auth-controller/passport_setup');
 
 
 // enable ssl redirect
@@ -42,7 +41,6 @@ app.use(passport.session());
 
 //connect to mongo db
 mongoose.connect(keys.mongodb.dbUrl, { useNewUrlParser: true, autoIndex: false }, () => {
-    console.log('keys.mongodb.dbUrl ', keys.mongodb.dbUrl);
     console.log('connected to mongodb');
 });
 
@@ -54,8 +52,6 @@ app.use(getRouter);
 app.use(postRouter);
 app.use(compression());
 app.use(cors());
-app.use(require('prerender-node'));
-
 
 // =======================
 // configuration =========
