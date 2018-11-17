@@ -7,19 +7,33 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px;
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 70% 15% 15%;
 
     .blog-title {
       grid-row: 1/2;
       margin: 10px 0;
     }
 
+    .blog-update {
+      grid-column: 2;
+      grid-row: 1/2;
+      justify-self: right;
+    }
+
+    .blog-delete {
+      grid-column: 3;
+      grid-row: 1/2;
+      justify-self: right;
+    }
+
     .blog-timestamp {
+      grid-column: 1/4;
       grid-row: 2/3;
       margin: 0 0 10px 0;
     }
 
     .blog-content {
+      grid-column: 1/4;
       grid-row: 3/4;
     }
   }
