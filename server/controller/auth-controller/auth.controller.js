@@ -99,7 +99,7 @@ let authController = {
 
     login: function (req, res) {
         // return passport.authenticate('local', { failureRedirect: '/auth/redirecto?url=login', successRedirect: '/auth/redirecto?url=/' });
-
+        console.log('loggin in...', req.body.email);
         User.findOne({ email: req.body.email })
         .exec()
         .then(function (user) {

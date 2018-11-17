@@ -40,7 +40,7 @@ app.use(passport.session());
 
 
 //connect to mongo db
-mongoose.connect(keys.mongodb.dbUrl, { useNewUrlParser: true, autoIndex: false }, () => {
+mongoose.connect(keys.mongodb.dbUrl_test, { useNewUrlParser: true, autoIndex: false }, () => {
     console.log('connected to mongodb');
 });
 

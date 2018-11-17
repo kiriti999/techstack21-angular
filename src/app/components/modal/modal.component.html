@@ -5,11 +5,10 @@
       <h2>Create blog</h2>
     </header>
     <div class="content">
-      <textarea id="edit-blog" rows="15" cols="98" required></textarea>
+      <textarea #editBlog id="edit-blog" rows="15" cols="70" required></textarea>
     </div>
     <footer class="modal-footer">
-      <button class="action">Accept</button>
-      <button class="action">Decline</button>
+      <button class="action modal-submit" (click)="onBlogSubmit()">Submit</button>
     </footer>
   </article>
 </div>
