@@ -11,7 +11,6 @@ export class ModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.button = document.querySelector(`button[data-modal-trigger]`);
   }
 
 }

@@ -1,4 +1,9 @@
 import { Component, Input, OnInit, HostListener } from '@angular/core';
+import { RestApiService } from '../../services/rest-api.service';
+import { DataService } from '../../services/data.service';
+import { environment } from '../../../environments/environment';
+import { network } from '../../api-call-list/api.call.list'
+import { ModalService } from '../../shared-services/modal.service';
 
 @Component({
   selector: 'app-center',
@@ -7,22 +12,28 @@ import { Component, Input, OnInit, HostListener } from '@angular/core';
 })
 export class CenterComponent implements OnInit {
 
+  blogs: any;
 
-  constructor() { }
+  constructor(private data: DataService, private rest: RestApiService, private modal: ModalService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    // try {
+    //   const data = await this.rest.get(environment.apiHost + network["data-on-page-load"]);
+    //   data['success']
+    //     ? (this.blogs = data['blogs'])
+    //     : this.data.error('Could not on-load data');
+    // } catch (error) {
+    //   this.data.error(error['message']);
+    // }
   }
 
-  modalEvent(e) {
-    const trigger = e.target.getAttribute('data-modal-trigger');
-    const modal = document.querySelector(`[data-modal=${trigger}]`);
-    const contentWrapper = modal.querySelector('.content-wrapper');
-    const close = modal.querySelector('.close');
 
-    close.addEventListener('click', () => modal.classList.remove('open'));
-    modal.addEventListener('click', () => modal.classList.remove('open'));
-    contentWrapper.addEventListener('click', (e) => e.stopPropagation());
-    modal.classList.toggle('open');
-}
+  /**
+    Opens modal
+    @param {event} event - Event passed from click
+  */
+  modalEvent(e) {
+    this.modal.modalEvent(e);
+  }
 
 }

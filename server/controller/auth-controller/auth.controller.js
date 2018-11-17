@@ -34,6 +34,7 @@ let authController = {
     },
 
     signUp: async function (req, res) {
+        console.log('signing up..... ', req.body.email);
 
         let user = await User.findOne({ 'email': req.body.email }).exec();
         if (user) {

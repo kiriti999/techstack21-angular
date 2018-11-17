@@ -70,11 +70,8 @@
   <li class="menu-item"><a href="/topic/Javascript">Javascript</a></li>
   <li class="menu-item"><a href="/topic/NodeJS">NodeJS</a></li>
   <li class="menu-item"><a href="topic/JQuery">JQuery</a></li>
-  <li class="menu-item" *ngIf="loggedIn">
-    <a>
-      <span class="create_button btn btn-xs btn-default" id='post_new_topic_btn' data-toggle="modal" data-target="#blog_posting_modal">
-        +Create post</span>
-    </a>
+  <li class="menu-item" data-modal-trigger="trigger-1" *ngIf="loggedIn" (click)="modalEvent($event)">
+      <span>+Create post</span>
   </li>
   <li class="menu-item" *ngIf="loggedIn">Logout</li>
 

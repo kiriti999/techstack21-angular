@@ -22,8 +22,8 @@ module.exports = {
     },
 
     mongodb: {
-        dbUrl: "mongodb://kiriti:12qwaszx@ds129770.mlab.com:29770/contechtual"
-        // dbUrl: "mongodb://localhost:27017/techstack21"
+        dbUrl: "mongodb://kiriti:12qwaszx@ds129770.mlab.com:29770/contechtual",
+        dbUrl_test: 'mongodb://kiriti:12qwaszx@ds163683.mlab.com:63683/techstack21_test'
     },
 
     session: {

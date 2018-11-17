@@ -41,7 +41,8 @@ app.use(passport.session());
 
 
 //connect to mongo db
-mongoose.connect(keys.mongodb.dbUrl, { autoIndex: false } , () => {
+mongoose.connect(keys.mongodb.dbUrl, { useNewUrlParser: true, autoIndex: false }, () => {
+    console.log('keys.mongodb.dbUrl ', keys.mongodb.dbUrl);
     console.log('connected to mongodb');
 });
 
@@ -69,7 +70,7 @@ app.listen(app.get('port'), function () {
 });
 
 app.get('/', function (request, response) {
-    response.sendFile(path.join(__dirname,'../dist/index.html'));
+    response.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 //global error logger
@@ -79,6 +80,6 @@ app.use(function (err, req, res, next) {
 });
 
 // Log requests to the console
-app.use(logger('dev')); 
+app.use(logger('dev'));
 
 module.exports = app;
