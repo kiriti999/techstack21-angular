@@ -1,0 +1,31 @@
+<app-header></app-header>
+<section class="category">
+  <div class="category-loader" *ngIf="!categories">
+    Loading categories <i class="fa fa-spinner fa-spin"></i>
+  </div>
+
+  <div class="category-list">
+    <h4>Categories</h4>
+    <ul class="dropdown">
+      <li *ngFor="let category of categories">
+        <a href="#" routerLink="/categories/{{ category._id }}">{{
+          category.name
+        }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-add">
+    <h4>Add New Category</h4>
+    <label>Category</label>
+    <input
+      type="text"
+      name="newCategory"
+      class="form-control"
+      [(ngModel)]="newCategory"
+    />
+    <button type="button" (click)="addCategory()" [disabled]="btnDisabled">
+      Add Category
+    </button>
+  </div>
+</section>

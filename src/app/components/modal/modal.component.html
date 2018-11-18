@@ -3,9 +3,12 @@
     <button class="close"></button>
     <header class="modal-header">
       <h2>Create blog</h2>
+      <p>
+        <input type="text" class='blog-title' #blogTitle/>
+      </p>
     </header>
     <div class="content">
-      <textarea #editBlog id="edit-blog" rows="15" cols="70" required></textarea>
+      <textarea #blogText id="edit-blog" rows="15" cols="70" required></textarea>
     </div>
     <footer class="modal-footer">
       <button class="action modal-submit" (click)="onBlogSubmit()">Submit</button>

@@ -1,0 +1,26 @@
+.category {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 50px;
+  grid-template-columns: 30% 60%;
+}
+
+.category-list {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  font-family: monospace;
+}
+
+ul {
+  overflow-y: scroll;
+}
+
+li {
+  list-style: none;
+}

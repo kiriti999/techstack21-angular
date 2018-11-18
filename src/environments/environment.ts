@@ -4,16 +4,7 @@
 
 export const environment = {
   production: false,
-  dbUrl: "dbUrl_test",
-  apiHost: 'http://localhost:5029/',
-  call_back_url_local: "http://localhost:5029",
-  "FBVars": {
-    "fbAppId": "227923824483815"
-  },
-  "google_blogger": {
-    "id": "9170308257488689808"
-  },
-  "server_port": "5029"
+  apiHost: 'http://localhost:5029/'
 };
 
 /*

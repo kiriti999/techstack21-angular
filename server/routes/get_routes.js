@@ -76,8 +76,12 @@ function getCategoriesOnPageLoad(req, res, next) {
     categoryModel.find({}, function (err, categories) {
         if (err) throw err;
         console.log('getCategoriesOnPageLoad ', categories);
-        res.send(categories);
-    })
+        res.json({
+          success: true,
+          message: "Success",
+          categories: categories
+        });
+    });
 }
 
 function logout(req, res, next) {

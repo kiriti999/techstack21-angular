@@ -2,7 +2,7 @@ import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
 import { environment } from '../../../environments/environment';
-import { network } from '../../api-call-list/api.call.list'
+import { apiUrl } from '../../api-call-list/api.call.list';
 import { ModalService } from '../../shared-services/modal.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class CenterComponent implements OnInit {
 
   async ngOnInit() {
     // try {
-    //   const data = await this.rest.get(environment.apiHost + network["data-on-page-load"]);
+    //   const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"]);
     //   data['success']
     //     ? (this.blogs = data['blogs'])
     //     : this.data.error('Could not on-load data');

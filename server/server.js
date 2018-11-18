@@ -10,7 +10,6 @@ var cookieSession = require('cookie-session');
 var passport = require('passport');
 var logger = require('morgan');
 
-
 //imports
 var compression = require('compression');
 var keys = require('./config/auth_keys');

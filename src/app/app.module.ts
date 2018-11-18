@@ -16,6 +16,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { PublicComponent } from './components/public/public.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ModalComponent } from './components/modal/modal.component';
     PublicComponent,
     SignupComponent,
     ModalComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
