@@ -22,11 +22,12 @@ export class ModalComponent implements OnInit {
 
   async onBlogSubmit() {
 
-    console.log(this.blogText.nativeElement.value);
+    console.log(this.blogTitle.nativeElement.value);
 
     try {
       const data = await this.rest.post(environment.apiHost + apiUrl['new_topic'], { title: this.blogTitle, details: this.blogDetails });
       data['success'] ? (this.blogs = data) : this.data.error('Could not on-load data');
+      // modal.querySelector('.modal-header h2').innerHTML = 'Edit blog';
     } catch (error) {
       this.data.error(error['message']);
     }
