@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { RestApiService } from 'src/app/services/rest-api.service';
 import { environment } from '../../../environments/environment';
-import { apiUrl } from '../../api-call-list/api.call.list'
+import { apiUrl } from '../../api-call-list/api.call.list';
 
 @Component({
   selector: 'app-modal',

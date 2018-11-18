@@ -23,6 +23,7 @@ export class ModalService {
     close.addEventListener('click', () => modal.classList.remove('open'));
     modalSubmit.addEventListener('click', () => modal.classList.remove('open'));
     modal.addEventListener('click', () => modal.classList.remove('open'));
+    // tslint:disable-next-line:no-shadowed-variable
     contentWrapper.addEventListener('click', (e) => e.stopPropagation());
     modal.classList.toggle('open');
   }
