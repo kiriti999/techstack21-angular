@@ -14,7 +14,7 @@ export class ModalComponent implements OnInit {
   blogs: any;
 
   @ViewChild('blogTitle') blogTitle: ElementRef;
-  @ViewChild('blogText') blogText: ElementRef;
+  @ViewChild('blogDetails') blogDetails: ElementRef;
   constructor(private data: DataService, private rest: RestApiService) { }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class ModalComponent implements OnInit {
     console.log(this.blogText.nativeElement.value);
 
     try {
-      const data = await this.rest.post(environment.apiHost + apiUrl['new_topic'], { title: this.blogTitle, blogText: this.details });
+      const data = await this.rest.post(environment.apiHost + apiUrl['new_topic'], { title: this.blogTitle, details: this.blogDetails });
       data['success'] ? (this.blogs = data) : this.data.error('Could not on-load data');
     } catch (error) {
       this.data.error(error['message']);
