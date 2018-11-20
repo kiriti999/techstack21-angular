@@ -19,6 +19,7 @@ export class RestApiService {
   }
 
   post(link: string, body: any) {
+    console.log('posting...');
     return this.http.post(link, body, { headers: this.getHeaders() }).toPromise();
   }
 }

@@ -1,11 +1,17 @@
 <app-header></app-header>
-<section class="category">
+
+<!-- <section class="category"> -->
+
+<!--
   <div class="category-loader" *ngIf="!categories">
     Loading categories <i class="fa fa-spinner fa-spin"></i>
   </div>
+-->
 
+<!--
   <div class="category-list">
     <h4>Categories</h4>
+
     <ul class="dropdown">
       <li *ngFor="let category of categories">
         <a href="#" routerLink="/categories/{{ category._id }}">{{
@@ -28,4 +34,40 @@
       Add Category
     </button>
   </div>
-</section>
+-->
+<!-- </section> -->
+
+<div class="create">
+  <div class="create-categories">
+    <div class="create-blog-list">
+      <ul>
+        <li *ngFor="let category of categories">
+          <a href="#" routerLink="/categories/{{ category._id }}">{{
+            category.name
+          }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="create-category-button">
+      <button>Add new category</button>
+    </div>
+  </div>
+
+  <div class="create-blog">
+    <div class="create-blog-box">
+      <div class="create-blog-title">
+        <h4>Create blog post</h4>
+      </div>
+      <div class="create-blog-title-input">
+        <label>Title: </label>
+        <input type="text" />
+      </div>
+      <div class="create-blog-details">
+        <textarea #blogDetails id="edit-blog" rows="15" cols="70" required></textarea>
+      </div>
+      <div class="create-blog-submit">
+        <button type="button">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

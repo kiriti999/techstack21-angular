@@ -32,8 +32,8 @@ export class CenterComponent implements OnInit {
     Opens modal
     @param {event} event - Event passed from click
   */
-  modalEvent(e) {
-    this.modal.modalEvent(e);
+  modalOpen(e) {
+    this.modal.modalOpen(e);
   }
 
 }

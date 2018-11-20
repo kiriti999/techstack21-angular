@@ -70,7 +70,7 @@
   <li class="menu-item"><a href="/topic/Javascript">Javascript</a></li>
   <li class="menu-item"><a href="/topic/NodeJS">NodeJS</a></li>
   <li class="menu-item"><a href="topic/JQuery">JQuery</a></li>
-  <li class="menu-item" data-modal-trigger="trigger-1" *ngIf="loggedIn" (click)="modalEvent($event)">
+  <li class="menu-item" data-modal-trigger="trigger-1" *ngIf="loggedIn" (click)="modalOpen($event)">
       <span>+Create post</span>
   </li>
   <li class="menu-item" *ngIf="loggedIn">Logout</li>

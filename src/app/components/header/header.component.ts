@@ -8,15 +8,15 @@ import { ModalService } from '../../shared-services/modal.service';
 })
 export class HeaderComponent implements OnInit {
 
-  loggedIn: boolean = false;
+  loggedIn = false;
 
   constructor(private _globalLoginService: GlobalLoginService, private modal: ModalService) {
 
   }
 
   ngOnInit() {
-    var userId = ((JSON.parse(localStorage.getItem('currentUser')) || {}).user || {}).id;
-    if (typeof userId == "undefined" || userId == null) {
+    const userId = ((JSON.parse(localStorage.getItem('currentUser')) || {}).user || {}).id;
+    if (typeof userId === 'undefined' || userId == null) {
       this._globalLoginService.globalLogin$.subscribe((value) => {
         this.loggedIn = value;
       });
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   Opens modal
   @param {event} event - Event passed from click
  */
-  modalEvent(e) {
-    this.modal.modalEvent(e);
+  modalOpen(e) {
+    this.modal.modalOpen(e);
   }
 }
