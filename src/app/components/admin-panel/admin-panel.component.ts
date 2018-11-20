@@ -4,6 +4,7 @@ import { apiUrl } from './../../api-call-list/api.call.list';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
+
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -12,12 +13,14 @@ import { DataService } from '../../services/data.service';
 export class AdminPanelComponent implements OnInit {
   createBlogForm: FormGroup;
   submitted = false;
+  private value:any = {};
+
   // categories: any;
   categories = [
-    {name: ''},
-    {name: 'sample1'},
-    {name: 'sample2'},
-    {name: 'sample3'},
+    { text: '' },
+    { text: 'sample1' },
+    { text: 'sample2' },
+    { text: 'sample3' },
   ]
 
   constructor(private formBuilder: FormBuilder, private data: DataService,
@@ -51,6 +54,22 @@ export class AdminPanelComponent implements OnInit {
     }
 
     alert('SUCCESS!! :-)')
+  }
+
+  public selected(value: any): void {
+    console.log('Selected value is: ', value);
+  }
+
+  public removed(value: any): void {
+    console.log('Removed value is: ', value);
+  }
+
+  public typed(value: any): void {
+    console.log('New search input: ', value);
+  }
+
+  public refreshValue(value: any): void {
+    this.value = value;
   }
 
 }

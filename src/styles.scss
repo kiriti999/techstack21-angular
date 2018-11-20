@@ -7,3 +7,5 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px
 );
+
+@import "~@ng-select/ng-select/themes/default.theme.css";

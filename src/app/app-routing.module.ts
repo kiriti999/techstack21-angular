@@ -7,11 +7,12 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 
 const routes: Routes = [
-  { path: '', component: PublicComponent, children: []},
+  { path: '', component: PublicComponent},
   { path: 'admin-login', component: LoginComponent },
   { path: 'admin-signup', component: SignupComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'admin-panel', component: AdminPanelComponent },
+  { path: 'admin-panel/categories', component: CategoriesComponent },
 ];
 
 @NgModule({

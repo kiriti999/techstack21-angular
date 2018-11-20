@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AdminPanelHeaderComponent } from './components/admin-panel/admin-panel-header/admin-panel-header.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { AppComponent } from './app.component';
@@ -35,11 +37,13 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
     ModalComponent,
     CategoriesComponent,
     AdminPanelComponent,
+    AdminPanelHeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule  ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],

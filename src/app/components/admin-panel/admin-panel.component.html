@@ -1,59 +1,11 @@
 <app-header></app-header>
 
-<!-- .navbar -->
-<nav class="navbar navbar-expand-md navbar-light bg-light nav-fill w-100">
-  <a class="navbar-brand" href="#">Admin panel</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto" style="flex: 1">
-
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Categories</a>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Blogs
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li> -->
-
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-<!-- /.navbar -->
+<app-admin-panel-header></app-admin-panel-header>
 
 <!-- main app container -->
 <div class="jumbotron">
   <div class="container">
     <div class="row">
-
 
       <form [formGroup]="createBlogForm" (ngSubmit)="onSubmit()" class="col-md-12" style="display: flex">
 
@@ -64,9 +16,16 @@
           <div class="form-group">
             <label for="exampleFormControlSelect1">Category select</label>
 
-            <select formControlName="category" class="form-control" id="exampleFormControlSelect1">
-              <option [ngClass]="{ 'is-invalid': submitted && f.category.errors }" *ngFor="let category of categories">{{category.name}}</option>
-            </select>
+            <ng-select
+            bindLabel="text"
+              [items]="categories"
+              (data)="refreshValue($event)"
+              (selected)="selected($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+              placeholder="No category selected">
+            </ng-select>
+
             <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
               <div *ngIf="f.title.errors.required">Category is required</div>
             </div>
