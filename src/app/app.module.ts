@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AdminPanelHeaderComponent } from './components/admin-panel/admin-panel-header/admin-panel-header.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import {MatTableModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
     ModalComponent,
     CategoriesComponent,
     AdminPanelComponent,
-    AdminPanelHeaderComponent
+    AdminPanelHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
     HttpClientModule,
     NgSelectModule,
     FormsModule,
-    ReactiveFormsModule  ],
+    ReactiveFormsModule, BrowserAnimationsModule,
+    MatTableModule  ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
