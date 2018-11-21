@@ -7,7 +7,7 @@ import { AdminPanelHeaderComponent } from './components/admin-panel/admin-panel-
 import { NgSelectModule } from '@ng-select/ng-select';
 import {MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { Ng2SmartTableModule, LocalDataSource  } from 'ng2-smart-table';
+import { Ng2SmartTableModule  } from 'ng2-smart-table';
 
 
 import { AppComponent } from './app.component';

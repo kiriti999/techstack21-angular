@@ -27,7 +27,7 @@ export class CategoriesComponent implements OnInit {
       confirmSave: true,
     },
     columns: {
-      id: {
+      _id: {
         title: 'ID',
         filter: false,
         editable: false
@@ -43,16 +43,16 @@ export class CategoriesComponent implements OnInit {
   arrData: any[] = [
     {
       id: 1,
-      name: "Category 1",
+      name: 'Category 1',
     },
     {
       id: 2,
-      name: "Category 2",
+      name: 'Category 2',
     },
 
     {
       id: 11,
-      name: "Category 3",
+      name: 'Category 3',
     }
   ];
 
@@ -60,7 +60,7 @@ export class CategoriesComponent implements OnInit {
     private data: DataService,
     private rest: RestApiService,
   ) {
-    this.source = new LocalDataSource(this.arrData); // create the source
+     // create the source
   }
 
   async ngOnInit() {
@@ -69,6 +69,7 @@ export class CategoriesComponent implements OnInit {
         environment.apiHost + apiUrl.getCategoriesOnPageLoad
       );
       data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
+      this.source = new LocalDataSource(this.categories);
     } catch (error) {
       this.data.error(error['message']);
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';\
+import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
   ];
 
 
-  constructor() { 
+  constructor() {
     this.source = new LocalDataSource(this.arrData); // create the source
   }
 
