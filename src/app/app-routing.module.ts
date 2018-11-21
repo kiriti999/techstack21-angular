@@ -5,6 +5,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { PublicComponent } from './components/public/public.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   { path: '', component: PublicComponent},
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'admin-signup', component: SignupComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'admin-panel', component: AdminPanelComponent },
+  { path: 'admin-panel/dashboard', component: AdminPanelComponent },
   { path: 'admin-panel/categories', component: CategoriesComponent },
+  { path: 'admin-panel/users', component: UsersComponent },
 ];
 
 @NgModule({

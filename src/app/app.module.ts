@@ -5,7 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AdminPanelHeaderComponent } from './components/admin-panel/admin-panel-header/admin-panel-header.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { Ng2SmartTableModule, LocalDataSource  } from 'ng2-smart-table';
 
 
 import { AppComponent } from './app.component';
@@ -22,7 +24,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
-import {MatTableModule} from '@angular/material';
+import {DemoMaterialModule} from './material.module';
+import { UsersComponent } from './components/users/users.component';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import {MatTableModule} from '@angular/material';
     CategoriesComponent,
     AdminPanelComponent,
     AdminPanelHeaderComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import {MatTableModule} from '@angular/material';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule, BrowserAnimationsModule,
-    MatTableModule  ],
+    Ng2SmartTableModule,
+    MatNativeDateModule, DemoMaterialModule  ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
