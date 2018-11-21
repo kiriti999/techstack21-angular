@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
 
-      <form [formGroup]="createBlogForm" (ngSubmit)="onSubmit()" class="col-md-12" style="display: flex">
+      <form [formGroup]="createBlogForm" (ngSubmit)="onSubmit($event)" class="col-md-12" style="display: flex">
 
         <div class="col-md-12 col-xs-12">
           <div class="form-group">
@@ -17,7 +17,8 @@
             <label for="exampleFormControlSelect1">Category select</label>
 
             <ng-select
-            bindLabel="text"
+              bindLabel="name"
+              (change)="onSelectChange($event)"
               [items]="categories"
               (data)="refreshValue($event)"
               (selected)="selected($event)"
@@ -26,9 +27,6 @@
               placeholder="No category selected">
             </ng-select>
 
-            <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-              <div *ngIf="f.title.errors.required">Category is required</div>
-            </div>
           </div>
 
           <div class="form-group">

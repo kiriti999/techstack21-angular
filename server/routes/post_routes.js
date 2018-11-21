@@ -80,41 +80,13 @@ function new_topic(req, res, next) {
     title: req.body.title,
     details: req.body.details,
     url: querystring.escape(req.body.url),
-    categories: req.body.categories
+    categories: req.body.category_name,
+    category: req.body.category_id
   });
-
-  var category_length = req.body.categories.length;
-  var categories = req.body.categories;
 
   article.save(function(err, newArticle) {
     if (err) throw err;
     console.log("article created ", newArticle._id);
-
-    for (var i = 0; i < categories.length; i++) {
-      (function(index) {
-        var category_article = new category_article_model({
-          category: categories[index],
-          article_id: newArticle._id
-        });
-
-        category_article.save(function(err, new_category_article) {
-          if (err) throw err;
-          console.log("");
-          console.log("");
-          console.log(
-            index + ": new Category created with category ID: ",
-            new_category_article._id
-          );
-          console.log(
-            index + ": new Category created with article ID: ",
-            new_category_article.article_id
-          );
-          console.log("");
-          console.log("");
-        });
-      })(i);
-    }
-
     return res.status(res.statusCode).send(unescapeArticle(newArticle));
   });
 }

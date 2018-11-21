@@ -59,9 +59,7 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private data: DataService,
     private rest: RestApiService,
-  ) {
-     // create the source
-  }
+  ) { }
 
   async ngOnInit() {
     try {

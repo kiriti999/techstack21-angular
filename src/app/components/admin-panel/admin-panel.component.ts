@@ -13,15 +13,17 @@ import { DataService } from '../../services/data.service';
 export class AdminPanelComponent implements OnInit {
   createBlogForm: FormGroup;
   submitted = false;
-  private value:any = {};
+  private value: any = {};
+  categoryObj: any;
+  blogs: any;
 
-  // categories: any;
-  categories = [
-    { text: '' },
-    { text: 'sample1' },
-    { text: 'sample2' },
-    { text: 'sample3' },
-  ]
+  categories: any;
+  // categories = [
+  //   { text: '' },
+  //   { text: 'sample1' },
+  //   { text: 'sample2' },
+  //   { text: 'sample3' },
+  // ]
 
   constructor(private formBuilder: FormBuilder, private data: DataService,
     private rest: RestApiService) { }
@@ -29,23 +31,22 @@ export class AdminPanelComponent implements OnInit {
   async ngOnInit() {
     this.createBlogForm = this.formBuilder.group({
       title: ['', Validators.required],
-      details: ['', Validators.required],
-      category: ['', Validators.required],
+      details: ['', Validators.required]
     });
 
-    // try {
-    //   const data = await this.rest.get(
-    //     environment.apiHost + apiUrl.getCategoriesOnPageLoad
-    //   );
-    //   data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
-    // } catch (error) {
-    //   this.data.error(error['message']);
-    // }
+    try {
+      const data = await this.rest.get(
+        environment.apiHost + apiUrl.getCategoriesOnPageLoad
+      );
+      data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
   }
 
   get f() { return this.createBlogForm.controls; }
 
-  onSubmit() {
+  async onSubmit(e) {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -53,7 +54,27 @@ export class AdminPanelComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)')
+    const formData = {...this.categoryObj, ...this.createBlogForm.value};
+
+    console.log('form data ', formData);
+
+    try {
+      const data = await this.rest.post(environment.apiHost + apiUrl.new_topic, formData);
+
+      data['success'] ? (this.blogs = data) : this.data.error('Could not on-load data');
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+
+    alert('SUCCESS!!');
+  }
+
+  onSelectChange(e) {
+    console.log('onchange ', e);
+    this.categoryObj = {
+      category_id: e._id,
+      category_name: e.name
+    };
   }
 
   public selected(value: any): void {
