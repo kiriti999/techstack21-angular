@@ -6,7 +6,6 @@ const deepPopulate = require('mongoose-deep-populate')(mongoose);
 var articleSchema = new Schema({
     "title": { type: String, required: true, unique: false },
     "details": String,
-    "username": { type: String, required: true, unique: false },
     "postImageUrl": String,
     "url": { type: String },
     "categories": [String],

@@ -63,16 +63,9 @@ function getRecent(req, res, next) {
 function new_topic(req, res, next) {
   console.log("");
   console.log("");
-  console.log("creating new article... ");
+  console.log("creating new article... ", req.body);
   console.log("");
   console.log("");
-  console.log("creating req.body.categories... ", req.body.categories);
-  console.log("");
-  console.log("");
-  console.log(
-    "creating check array type req.body.categories... ",
-    Array.isArray(req.body.categories)
-  );
   console.log("");
   console.log("");
 
@@ -87,7 +80,11 @@ function new_topic(req, res, next) {
   article.save(function(err, newArticle) {
     if (err) throw err;
     console.log("article created ", newArticle._id);
-    return res.status(res.statusCode).send(unescapeArticle(newArticle));
+    res.json({
+      success: true,
+      message: "Successful",
+      blog: newArticle
+    });
   });
 }
 

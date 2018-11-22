@@ -77,9 +77,9 @@ function getCategoriesOnPageLoad(req, res, next) {
         if (err) throw err;
         console.log('getCategoriesOnPageLoad ', categories);
         res.json({
-          success: true,
-          message: "Success",
-          categories: categories
+            success: true,
+            message: "Success",
+            categories: categories
         });
     });
 }
@@ -109,18 +109,21 @@ function getDataOnPageLoad(req, res, next) {
         .find({}).sort({ $natural: -1 })
         .skip(parseInt(req.params.offset), 10)
         .limit(parseInt(req.params.limit), 10)
-        .exec(function (err, articles) {
+        .exec(function (err, blogs) {
             if (err) {
                 throw err;
             }
             console.log('');
             console.log('');
-            console.log('');
-            console.log('article on load ', articles);
-            console.log('');
+            console.log('article on load ', blogs);
             console.log('');
             console.log('');
-            return res.status(res.statusCode).send(articles);
+            res.json({
+                success: true,
+                message: "blogs",
+                blogs: blogs
+            });
+            // return res.status(res.statusCode).send(articles);
         });
 }
 
@@ -242,19 +245,12 @@ function deleteTopic(req, res, next) {
         console.log('');
         console.log('');
 
-        category_article_model.remove({ article_id: req.params.deleteId }, function (err, deletedArticleCategoryMapping) {
-            if (err) {
-                throw err;
-            }
-            console.log('');
-            console.log('');
-            console.log('deleting deletedArticleCategoryMapping: ', deletedArticleCategoryMapping);
-            console.log('');
-            console.log('');
-
-            return res.sendStatus(200);
-        })
-    })
+        res.json({
+            success: true,
+            message: "blogs",
+            blogId: deletedArticle._id
+        });
+    });
 }
 
 module.exports = getRouter;

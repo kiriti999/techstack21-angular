@@ -46,6 +46,13 @@ export class AdminPanelComponent implements OnInit {
 
   get f() { return this.createBlogForm.controls; }
 
+  escape: HTMLTextAreaElement = document.createElement('textarea');
+
+  escapeHTML(html) {
+    this.escape.textContent = html;
+    return this.escape.innerHTML;
+  }
+
   async onSubmit(e) {
     this.submitted = true;
 
@@ -54,7 +61,11 @@ export class AdminPanelComponent implements OnInit {
       return;
     }
 
-    const formData = {...this.categoryObj, ...this.createBlogForm.value};
+    const url = {
+      url : this.escapeHTML(this.createBlogForm.value['title'].toLowerCase().split(' ').join('-'))
+    } 
+    
+    const formData = {...this.categoryObj, ...this.createBlogForm.value, ...url};
 
     console.log('form data ', formData);
 

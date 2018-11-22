@@ -17,14 +17,31 @@ export class CenterComponent implements OnInit {
   constructor(private data: DataService, private rest: RestApiService, private modal: ModalService) { }
 
   async ngOnInit() {
-    // try {
-    //   const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"]);
-    //   data['success']
-    //     ? (this.blogs = data['blogs'])
-    //     : this.data.error('Could not on-load data');
-    // } catch (error) {
-    //   this.data.error(error['message']);
-    // }
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"] + "/5/0");
+      data['success']
+        ? (this.blogs = data['blogs'])
+        : this.data.error('Could not on-load data');
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+  }
+
+  async onDelete(e) {
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl["deleteTopic"] + "/" + e.target.id);
+      if (data['success']) {
+        this.blogs.forEach(function (v, i, arr) {
+          if (v._id === data['blogId']) {
+            arr.splice(i, 1);
+          }
+        });
+      } else {
+        this.data.error('Could not on-load data');
+      }
+    } catch (error) {
+      this.data.error(error['message']);
+    }
   }
 
 

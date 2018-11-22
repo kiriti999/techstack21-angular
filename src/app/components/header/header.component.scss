@@ -1,20 +1,20 @@
 .header {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  justify-items: center;
-  align-items: center;
-
-  .menu-item {
-    list-style-type: none;
-
-    a {
-      color: #000;
-      text-decoration: none;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    justify-items: center;
+    align-items: center;
+    .menu-item {
+        list-style-type: none;
+        a {
+            color: rgba(0, 0, 0, .5);
+            text-decoration: none;
+        }
+        a.active {
+            color: rgba(0, 0, 0, .9);
+        }
+        .logo>svg {
+            height: 68px;
+        }
     }
-
-    .logo > svg {
-      height: 68px;
-    }
-  }
 }
