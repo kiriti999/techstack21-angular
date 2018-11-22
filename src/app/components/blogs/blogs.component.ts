@@ -34,6 +34,7 @@ export class BlogsComponent implements OnInit {
       },
       title: {
         title: 'blog title',
+        searchFields: 'Search by title',
       },
       created_at: {
         title: 'created on'
