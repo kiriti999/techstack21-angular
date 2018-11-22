@@ -12,7 +12,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class BlogsComponent implements OnInit {
 
-  categories: any;
+  blogs: any;
   newCategory = '';
   btnDisabled = false;
 
@@ -32,29 +32,20 @@ export class BlogsComponent implements OnInit {
         filter: false,
         editable: false
       },
-      name: {
-        title: 'Full Name',
-        placeholder: 'Search by name'
+      title: {
+        title: 'blog title',
+      },
+      created_at: {
+        title: 'created on'
       }
+    },
+    actions: {
+      edit: false
     }
   };
 
-  source: LocalDataSource; // add a property to the component
-  arrData: any[] = [
-    {
-      id: 1,
-      name: 'Category 1',
-    },
-    {
-      id: 2,
-      name: 'Category 2',
-    },
 
-    {
-      id: 11,
-      name: 'Category 3',
-    }
-  ];
+  source: LocalDataSource; // add a property to the component
 
   constructor(
     private data: DataService,
@@ -63,11 +54,9 @@ export class BlogsComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(
-        environment.apiHost + apiUrl.getCategoriesOnPageLoad
-      );
-      data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
-      this.source = new LocalDataSource(this.categories);
+      const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"] + "/5/0");
+      data['success'] ? (this.blogs = data['blogs']) : this.data.error(data['message']);
+      this.source = new LocalDataSource(this.blogs);
     } catch (error) {
       this.data.error(error['message']);
     }
