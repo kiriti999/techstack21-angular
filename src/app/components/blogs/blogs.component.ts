@@ -41,7 +41,7 @@ export class BlogsComponent implements OnInit {
       }
     },
     actions: {
-      edit: false
+      // edit: false
     }
   };
 

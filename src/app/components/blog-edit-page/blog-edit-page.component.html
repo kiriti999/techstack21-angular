@@ -1,0 +1,16 @@
+<div class="blog-edit">
+  <div class="blog-edit-body">
+    <header class="blog-edit-header">
+      <h2 class="blog-edit-title">Edit blog</h2>
+      <label>Title: </label>
+      <input type="text" class="blog-edit-input" #blogTitle />
+    </header>
+    <div class="blog-edit-content">
+      <label class="blog-edit-content-text">Description:</label>
+      <textarea #blogDetails id="edit-blog" rows="15" cols="70" required></textarea>
+    </div>
+    <footer class="blog-edit-footer">
+      <button class="action modal-submit" type="button" (click)="onBlogEdit()">Submit</button>
+    </footer>
+  </div>
+</div>

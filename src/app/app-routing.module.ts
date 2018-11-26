@@ -7,6 +7,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { BlogsComponent } from './components/blogs/blogs.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { UsersComponent } from './components/users/users.component';
+import { BlogEditPageComponent } from './components/blog-edit-page/blog-edit-page.component';
 
 const routes: Routes = [
   { path: '', component: PublicComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'admin-panel/categories', component: CategoriesComponent },
   { path: 'admin-panel/users', component: UsersComponent },
   { path: 'admin-panel/blogs', component: BlogsComponent },
+  { path: 'admin-panel/blog-edit-page', component: BlogEditPageComponent }
 ];
 
 @NgModule({

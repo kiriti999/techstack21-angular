@@ -27,6 +27,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import {DemoMaterialModule} from './material.module';
 import { UsersComponent } from './components/users/users.component';
 import { BlogsComponent } from './components/blogs/blogs.component';
+import { BlogEditPageComponent } from './components/blog-edit-page/blog-edit-page.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { BlogsComponent } from './components/blogs/blogs.component';
     AdminPanelHeaderComponent,
     UsersComponent,
     BlogsComponent,
+    BlogEditPageComponent,
   ],
   imports: [
     BrowserModule,
