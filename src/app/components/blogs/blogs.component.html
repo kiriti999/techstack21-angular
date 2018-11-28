@@ -27,7 +27,7 @@
           <td><a routerLink="['/admin-panel/blog-edit-page', {{blog._id}}]">Edit</a></td>
         -->
         <td><a id="{{blog._id}}" attr.data-details= "{{blog.details}}" data-title="{{blog.title}}" (click)="onNavigate($event)">Edit</a></td>
-        <td><a href="#" (click)="onDelete($event)">Delete</a></td>
+        <td><a id="{{blog._id}}" href="#" (click)="onDelete($event)">Delete</a></td>
       </tr>
     </tbody>
   </table>
