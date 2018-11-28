@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blogs',
@@ -11,20 +12,19 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./blogs.component.scss']
 })
 export class BlogsComponent implements OnInit {
-
   blogs: any;
   newCategory = '';
   btnDisabled = false;
 
   settings = {
     delete: {
-      confirmDelete: true,
+      confirmDelete: true
     },
     add: {
-      confirmCreate: true,
+      confirmCreate: true
     },
     edit: {
-      confirmSave: true,
+      confirmSave: true
     },
     columns: {
       _id: {
@@ -34,7 +34,7 @@ export class BlogsComponent implements OnInit {
       },
       title: {
         title: 'blog title',
-        searchFields: 'Search by title',
+        searchFields: 'Search by title'
       },
       created_at: {
         title: 'created on'
@@ -45,18 +45,18 @@ export class BlogsComponent implements OnInit {
     }
   };
 
-
   source: LocalDataSource; // add a property to the component
 
-  constructor(
-    private data: DataService,
-    private rest: RestApiService,
-  ) { }
+  constructor(private data: DataService, private rest: RestApiService, private router: Router) {}
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"] + "/5/0");
-      data['success'] ? (this.blogs = data['blogs']) : this.data.error(data['message']);
+      const data = await this.rest.get(
+        environment.apiHost + apiUrl['data-on-page-load'] + '/5/0'
+      );
+      data['success']
+        ? (this.blogs = data['blogs'])
+        : this.data.error(data['message']);
       this.source = new LocalDataSource(this.blogs);
     } catch (error) {
       this.data.error(error['message']);
@@ -84,4 +84,11 @@ export class BlogsComponent implements OnInit {
     e.confirm.resolve(e.newData);
   }
 
+  onDelete(e) {}
+
+  onNavigate(e) {
+    console.log(e);
+    this.router.navigate(['/admin-panel/blog-edit-page',
+    { id: e.target.id, title: e.target.getAttribute('title'), details: e.target.dataset.details }]);
+  }
 }
