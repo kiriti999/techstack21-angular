@@ -16,6 +16,7 @@ export class AdminPanelComponent implements OnInit {
   private value: any = {};
   categoryObj: any;
   blogs: any;
+  loading: true;
 
   categories: any;
   // categories = [

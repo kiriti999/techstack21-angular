@@ -61,4 +61,8 @@ export class UsersComponent implements OnInit {
     e.confirm.resolve(e.newData);
   }
 
+  onEditConfirm(e) {
+    
+  }
+
 }

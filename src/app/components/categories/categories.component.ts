@@ -94,4 +94,8 @@ export class CategoriesComponent implements OnInit {
     e.confirm.resolve(e.newData);
   }
 
+  onEditConfirm(e) {
+
+  }
+
 }
