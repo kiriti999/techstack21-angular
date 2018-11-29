@@ -17,6 +17,10 @@ export class CategoriesComponent implements OnInit {
   btnDisabled = false;
 
   settings = {
+    pager: {
+      display: true,
+      perPage: 5,
+    },
     delete: {
       confirmDelete: true,
     },
