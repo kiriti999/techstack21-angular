@@ -18,7 +18,7 @@ export class CenterComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"] + "/5/0");
+      const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"]);
       data['success']
         ? (this.blogs = data['blogs'])
         : this.data.error('Could not on-load data');
