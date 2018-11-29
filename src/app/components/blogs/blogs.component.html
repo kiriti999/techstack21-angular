@@ -16,10 +16,11 @@
         <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Details</th>
+        <th> <input class="form-control" type="text" name="search" [(ngModel)]="filter"> </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let blog of blogs; let i = index">
+      <tr *ngFor="let blog of blogs | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{ blog._id }}</td>
         <td>{{ blog.title }}</td>
@@ -29,19 +30,8 @@
         <td><a id="{{blog._id}}" class="blog-anchor" (click)="onDelete($event)">Delete</a></td>
       </tr>
     </tbody>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </table>
 
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" tabindex="-1" id='previous' (click)="pagination($event)">Previous</a>
-      </li>
-      <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-      <li class="page-item">
-        <a class="page-link" id='next' (click)="pagination($event)">Next</a>
-      </li>
-    </ul>
-  </nav>
+
 </div>

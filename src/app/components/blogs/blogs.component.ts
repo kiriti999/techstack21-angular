@@ -15,7 +15,8 @@ export class BlogsComponent implements OnInit {
   blogs: any;
   newCategory = '';
   btnDisabled = false;
-  pageLength = 0;
+  //initializing p to one
+  p: number = 1;
 
   settings = {
     delete: {
@@ -57,30 +58,9 @@ export class BlogsComponent implements OnInit {
       );
       if (data['success']) {
         (this.blogs = data['blogs'])
-        this.pageLength = this.blogs.length;
       } else {
         this.data.error(data['message']);
       }
-      this.source = new LocalDataSource(this.blogs);
-    } catch (error) {
-      this.data.error(error['message']);
-    }
-  }
-
-  async pagination(e) {
-    try {
-      let data: Object;
-      if (e.target.id === 'next') {
-        console.log('next');
-        data = await this.rest.get(environment.apiHost + apiUrl['data-on-page-load'] + '/5/' + this.pageLength);
-        console.log('this.pageLength ', this.pageLength);
-      } else {
-        console.log('previous');
-        data = await this.rest.get(environment.apiHost + apiUrl['data-on-page-load'] + '/5/' + this.pageLength);
-      }
-      data['success']
-        ? (this.blogs = data['blogs'])
-        : this.data.error(data['message']);
       this.source = new LocalDataSource(this.blogs);
     } catch (error) {
       this.data.error(error['message']);
