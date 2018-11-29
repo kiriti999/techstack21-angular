@@ -2,33 +2,33 @@
 <app-admin-panel-header></app-admin-panel-header>
 
 <div class="categories">
-  <div class="categories-table">
-    <!-- <ng2-smart-table (createConfirm)="onCreateConfirm($event)" routerLink='admin-panel/blog-edit-page' (editConfirm)="onSaveConfirm($event)"
-    (createConfirm)="onCreateConfirm($event)" [settings]="settings" [source]="source" mode="inline"></ng2-smart-table>
-  </div> -->
-
-    <div class="categories">
-      <div class="categories-table">
-        <!-- <ng2-smart-table (createConfirm)="onCreateConfirm($event)" (editConfirm)="onSaveConfirm($event)"
-    (createConfirm)="onCreateConfirm($event)" [settings]="settings" [source]="source" mode="inline"></ng2-smart-table> -->
-
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">ID</th>
-              <th scope="col">Title</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let blog of blogs">
-              <th scope="row">1</th>
-              <td>{{blog._id}}</td>
-              <td>{{blog.title}}</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
+  <!--
+    <div class="categories-table">
+      <ng2-smart-table (createConfirm)="onCreateConfirm($event)" routerLink='admin-panel/blog-edit-page' (editConfirm)="onSaveConfirm($event)"
+      (createConfirm)="onCreateConfirm($event)" [settings]="settings" [source]="source" mode="inline"></ng2-smart-table>
     </div>
-  </div>
+  -->
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let blog of blogs">
+        <th scope="row">1</th>
+        <td>{{ blog._id }}</td>
+        <td>{{ blog.title }}</td>
+        <td >{{ blog.details }}</td>
+        <!--
+          <td><a routerLink="['/admin-panel/blog-edit-page', {{blog._id}}]">Edit</a></td>
+        -->
+        <td><a id="{{blog._id}}" attr.data-details= "{{blog.details}}" data-title="{{blog.title}}" (click)="onNavigate($event)">Edit</a></td>
+        <td><a id="{{blog._id}}" href="#" (click)="onDelete($event)">Delete</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
