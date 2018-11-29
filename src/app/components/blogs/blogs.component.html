@@ -18,8 +18,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let blog of blogs">
-        <th scope="row">1</th>
+      <tr *ngFor="let blog of blogs; let i = index">
+        <th scope="row">{{i+1}}</th>
         <td>{{ blog._id }}</td>
         <td>{{ blog.title }}</td>
         <td >{{ blog.details }}</td>
