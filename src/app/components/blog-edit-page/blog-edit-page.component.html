@@ -1,16 +1,19 @@
 <div class="blog-edit">
-  <div class="blog-edit-body">
-    <header class="blog-edit-header">
-      <h2 class="blog-edit-title">Edit blog</h2>
-      <label>Title: </label>
-      <input type="text" class="blog-edit-input" #blogTitle value="{{title}}" />
-    </header>
-    <div class="blog-edit-content">
-      <label class="blog-edit-content-text">Description:</label>
-      <textarea #blogDetails id="edit-blog" rows="15" cols="70" required>{{details}}</textarea>
+    <div class="blog-edit-body">
+      <form (ngSubmit)='onEditSubmit($event)' [formGroup]="editForm">
+        <header class="blog-edit-header">
+          <h2 class="blog-edit-title">Edit blog</h2>
+          <input type="text" formControlName="id" class="blog-edit-input" required style="visibility: hidden"/>
+          <label>Title: </label>
+          <input type="text" formControlName="title" class="blog-edit-input" required/>
+        </header>
+        <div class="blog-edit-content">
+          <label class="blog-edit-content-text">Description:</label>
+          <textarea formControlName="details" id="edit-blog" rows="15" cols="70" required>{{details}}</textarea>
+        </div>
+        <footer class="blog-edit-footer">
+          <button class="action modal-submit" [disabled]="!editForm.valid" type="submit">Submit</button>
+        </footer>
+      </form>
     </div>
-    <footer class="blog-edit-footer">
-      <button class="action modal-submit" id='{{routeId}}' type="button" (click)="onBlogEdit($event)">Submit</button>
-    </footer>
   </div>
-</div>

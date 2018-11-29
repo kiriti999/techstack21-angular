@@ -1,3 +1,12 @@
 .categories {
     margin: 50px 100px;
 }
+
+td > a.blog-anchor {
+    color: #007bff;
+}
+
+td > a.blog-anchor:hover {
+    text-decoration: underline;
+    color: #064992;
+}

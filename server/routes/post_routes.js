@@ -52,7 +52,7 @@ function getRecent(req, res, next) {
     .sort({ $natural: -1 })
     .skip(parseInt(req.body.offset), 10)
     .limit(parseInt(req.body.limit), 10)
-    .exec(function(err, articles) {
+    .exec(function (err, articles) {
       if (err) {
         throw err;
       }
@@ -77,7 +77,7 @@ function new_topic(req, res, next) {
     category: req.body.category_id
   });
 
-  article.save(function(err, newArticle) {
+  article.save(function (err, newArticle) {
     if (err) throw err;
     console.log("article created ", newArticle._id);
     res.json({
@@ -106,7 +106,7 @@ function update_topic(req, res, next) {
     { _id: req.body.id },
     params,
     { new: true },
-    function(err, updatedArticle) {
+    function (err, updatedArticle) {
       if (err) throw err;
       console.log(" ");
       console.log(" ");
@@ -129,7 +129,10 @@ function update_topic(req, res, next) {
       console.log(" ");
       console.log(" ");
 
-      return res.send(unescapeArticle(updatedArticle));
+      res.json({
+        success: true,
+        message: "Successful"
+      });
     }
   );
 }
@@ -155,7 +158,7 @@ function unescapeArticle(updatedArticle) {
 }
 
 function getPostById(req, res, next) {
-  articleModel.findById(req.body.id, function(err, article) {
+  articleModel.findById(req.body.id, function (err, article) {
     if (err) throw err;
     console.log("article by Id", article);
     return res.send(article);
@@ -176,7 +179,7 @@ function postApiResponse(url, req, next, res) {
   };
 
   rp(options)
-    .then(function(response) {
+    .then(function (response) {
       console.log("==========@@@@@@@@@@@============");
       console.log("==========@@@@@@@@@@@============");
       console.log("==========@@@@@@@@@@@============");
@@ -188,7 +191,7 @@ function postApiResponse(url, req, next, res) {
         return res.status(res.statusCode).send(response);
       else return res.status(500);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log("=================================");
       console.log("=================================");
       console.log("=================================");
@@ -227,7 +230,7 @@ function createGoogleBloggerPost(req, res, next) {
   };
 
   console.log("oauth2Client $$$$$", oauth2Client);
-  oauth2Client.getToken(req.body.exchangeCode, function(err, tokens) {
+  oauth2Client.getToken(req.body.exchangeCode, function (err, tokens) {
     if (!err) {
       oauth2Client.setCredentials(tokens);
 
@@ -246,7 +249,7 @@ function createGoogleBloggerPost(req, res, next) {
       };
 
       rp(options)
-        .then(function(response) {
+        .then(function (response) {
           console.log("=================================");
           console.log("BLOGGER POST SUCCESS");
           console.log("=================================");
@@ -254,7 +257,7 @@ function createGoogleBloggerPost(req, res, next) {
             res.send("BLOG POST SUCCESS");
           else return res.status(500);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log("=================================");
           console.error("POST error ", err.stack);
           console.log("=================================");

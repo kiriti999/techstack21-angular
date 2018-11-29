@@ -15,6 +15,7 @@
         <th scope="col">#</th>
         <th scope="col">ID</th>
         <th scope="col">Title</th>
+        <th scope="col">Details</th>
       </tr>
     </thead>
     <tbody>
@@ -22,13 +23,25 @@
         <th scope="row">{{i+1}}</th>
         <td>{{ blog._id }}</td>
         <td>{{ blog.title }}</td>
-        <td >{{ blog.details }}</td>
-        <!--
-          <td><a routerLink="['/admin-panel/blog-edit-page', {{blog._id}}]">Edit</a></td>
-        -->
-        <td><a id="{{blog._id}}" attr.data-details= "{{blog.details}}" data-title="{{blog.title}}" (click)="onNavigate($event)">Edit</a></td>
-        <td><a id="{{blog._id}}" href="#" (click)="onDelete($event)">Delete</a></td>
+        <td>{{ blog.details.substring(0,20) }}</td>
+        <td><a id="{{blog._id}}" attr.data-details="{{blog.details}}" class="blog-anchor" data-title="{{blog.title}}"
+            (click)="onNavigate($event)">Edit</a></td>
+        <td><a id="{{blog._id}}" class="blog-anchor" (click)="onDelete($event)">Delete</a></td>
       </tr>
     </tbody>
   </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" tabindex="-1" id='previous' (click)="pagination($event)">Previous</a>
+      </li>
+      <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+      <li class="page-item">
+        <a class="page-link" id='next' (click)="pagination($event)">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>

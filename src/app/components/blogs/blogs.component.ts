@@ -15,6 +15,7 @@ export class BlogsComponent implements OnInit {
   blogs: any;
   newCategory = '';
   btnDisabled = false;
+  pageLength = 0;
 
   settings = {
     delete: {
@@ -47,13 +48,36 @@ export class BlogsComponent implements OnInit {
 
   source: LocalDataSource; // add a property to the component
 
-  constructor(private data: DataService, private rest: RestApiService, private router: Router) {}
+  constructor(private data: DataService, private rest: RestApiService, private router: Router) { }
 
   async ngOnInit() {
     try {
       const data = await this.rest.get(
-        environment.apiHost + apiUrl['data-on-page-load'] + '/5/0'
+        environment.apiHost + apiUrl['data-on-page-load']
       );
+      if (data['success']) {
+        (this.blogs = data['blogs'])
+        this.pageLength = this.blogs.length;
+      } else {
+        this.data.error(data['message']);
+      }
+      this.source = new LocalDataSource(this.blogs);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+  }
+
+  async pagination(e) {
+    try {
+      let data: Object;
+      if (e.target.id === 'next') {
+        console.log('next');
+        data = await this.rest.get(environment.apiHost + apiUrl['data-on-page-load'] + '/5/' + this.pageLength);
+        console.log('this.pageLength ', this.pageLength);
+      } else {
+        console.log('previous');
+        data = await this.rest.get(environment.apiHost + apiUrl['data-on-page-load'] + '/5/' + this.pageLength);
+      }
       data['success']
         ? (this.blogs = data['blogs'])
         : this.data.error(data['message']);
@@ -84,11 +108,26 @@ export class BlogsComponent implements OnInit {
     e.confirm.resolve(e.newData);
   }
 
-  onDelete(e) {}
+  async onDelete(e) {
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl["deleteTopic"] + "/" + e.target.id);
+      if (data['success']) {
+        this.blogs.forEach(function (v, i, arr) {
+          if (v._id === data['blogId']) {
+            arr.splice(i, 1);
+          }
+        });
+      } else {
+        this.data.error('Could not on-load data');
+      }
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+  }
 
   onNavigate(e) {
     console.log(e);
     this.router.navigate(['/admin-panel/blog-edit-page',
-    { id: e.target.id, title: e.target.getAttribute('title'), details: e.target.dataset.details }]);
+      { id: e.target.id, title: e.target.getAttribute('title'), details: e.target.dataset.details }]);
   }
 }

@@ -13,7 +13,7 @@ getRouter.get('/getDataOnScrollEnd/:limit/:offset', getDataOnScrollEnd);
 getRouter.get('/getCategoriesOnPageLoad', getCategoriesOnPageLoad);
 getRouter.get('/createCategory/:name', createCategory);
 getRouter.get('/deleteCategory/:name', deleteCategory);
-getRouter.get('/getDataOnPageLoad/:limit/:offset', getDataOnPageLoad);
+getRouter.get('/getDataOnPageLoad', getDataOnPageLoad);
 getRouter.get('/deleteTopic/:deleteId', deleteTopic);
 getRouter.get('/article*', loadByUrl);
 getRouter.get('/get_post_by_category/:name', getPostByCategory);
@@ -107,8 +107,8 @@ function getDataOnScrollEnd(req, res, next) {
 function getDataOnPageLoad(req, res, next) {
     articleModel
         .find({}).sort({ $natural: -1 })
-        .skip(parseInt(req.params.offset), 10)
-        .limit(parseInt(req.params.limit), 10)
+        // .skip(parseInt(req.params.offset), 10)
+        // .limit(parseInt(req.params.limit), 10)
         .exec(function (err, blogs) {
             if (err) {
                 throw err;
