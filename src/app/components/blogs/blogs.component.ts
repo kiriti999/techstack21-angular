@@ -6,6 +6,7 @@ import { DataService } from '../../services/data.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -15,8 +16,10 @@ export class BlogsComponent implements OnInit {
   blogs: any;
   newCategory = '';
   btnDisabled = false;
-  //initializing p to one
-  p: number = 1;
+  filter: any;
+  searchText = '';
+  // initializing p to one
+  p = 1;
 
   settings = {
     delete: {
@@ -57,7 +60,7 @@ export class BlogsComponent implements OnInit {
         environment.apiHost + apiUrl['data-on-page-load']
       );
       if (data['success']) {
-        (this.blogs = data['blogs'])
+        (this.blogs = data['blogs']);
       } else {
         this.data.error(data['message']);
       }
@@ -90,7 +93,7 @@ export class BlogsComponent implements OnInit {
 
   async onDelete(e) {
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl["deleteTopic"] + "/" + e.target.id);
+      const data = await this.rest.get(environment.apiHost + apiUrl['deleteTopic'] + '/' + e.target.id);
       if (data['success']) {
         this.blogs.forEach(function (v, i, arr) {
           if (v._id === data['blogId']) {

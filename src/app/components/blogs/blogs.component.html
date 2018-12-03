@@ -2,12 +2,6 @@
 <app-admin-panel-header></app-admin-panel-header>
 
 <div class="categories">
-  <!--
-    <div class="categories-table">
-      <ng2-smart-table (createConfirm)="onCreateConfirm($event)" routerLink='admin-panel/blog-edit-page' (editConfirm)="onSaveConfirm($event)"
-      (createConfirm)="onCreateConfirm($event)" [settings]="settings" [source]="source" mode="inline"></ng2-smart-table>
-    </div>
-  -->
 
   <table class="table table-striped">
     <thead>
@@ -16,11 +10,11 @@
         <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Details</th>
-        <th> <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="Search"> </th>
+        <th> <input class="form-control" type="text" name="search" [(ngModel)]='searchText' placeholder="Search"> </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let blog of blogs | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+      <tr *ngFor="let blog of blogs | searchByTitlePipe:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{ blog._id }}</td>
         <td>{{ blog.title }}</td>
