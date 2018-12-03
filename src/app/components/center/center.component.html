@@ -1,10 +1,11 @@
 <div class="center">
 
-    <div class="blog" *ngFor="let blog of blogs">
+    <div class="blog" *ngFor="let blog of blogs | paginate: { itemsPerPage: 5, currentPage: p }">
         <div class="blog-title">{{blog.title}}</div>
         <div class="blog-update trigger" data-modal-trigger="trigger-1"><i class="fa fa-edit" routerLink='/admin-panel/blogs'></i></div>
         <div class="blog-delete"><i class="fa fa-trash" (click)="onDelete($event)" id={{blog._id}} aria-hidden="true"></i></div>
         <div class="blog-timestamp"><h5>By techstack21 on {{blog.created_at | date:'dd-MM-yy' }}</h5></div>
         <div class="blog-content">{{blog.details}}</div>
     </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
