@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { RestApiService } from '../../services/rest-api.service';
+import { DataService } from '../../services/data.service';
+import { environment } from '../../../environments/environment';
+import { apiUrl } from './../../api-call-list/api.call.list';
+import { SharedService } from '../../shared-services/shared.service';
 
 @Component({
   selector: 'app-right-rail',
@@ -7,9 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RightRailComponent implements OnInit {
 
-  constructor() { }
+  categories: any;
+  blogs: [];
 
-  ngOnInit() {
+  constructor(
+    private data: DataService,
+    private rest: RestApiService,
+    private _sharedService: SharedService
+  ) { }
+
+  async ngOnInit() {
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl.getCategoriesOnPageLoad);
+      data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+  }
+
+  async getBlogsByCategory(e) {
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl['get_post_by_category']+'/'+e.target.value);
+      if(data['success']) {
+        (this.blogs = data['blogs']);
+        this._sharedService.loadBlogs(data['blogs']);
+      } else {
+        this.data.error(data['message']);
+      }
+    } catch (error) {
+      this.data.error(error['message']);
+    }
   }
 
 }

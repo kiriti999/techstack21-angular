@@ -48,7 +48,12 @@ function getPostByCategory(req, res, next) {
         console.log('article by category ', articlesByCategory);
         console.log('');
         console.log('');
-        return res.send(articlesByCategory);
+        res.json({
+            success: true,
+            message: "Success",
+            blogs: articlesByCategory
+        });
+        // return res.send(articlesByCategory);
     })
 }
 
@@ -61,7 +66,7 @@ function createCategory(req, res, next) {
         if (err) throw err;
         console.log('new Category created', newCategory);
         return res.send(newCategory);
-    })
+    });
 }
 
 function deleteCategory(req, res, next) {

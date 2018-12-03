@@ -1,5 +1,5 @@
 import { apiUrl } from './../../api-call-list/api.call.list';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
@@ -67,9 +67,7 @@ export class CategoriesComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(
-        environment.apiHost + apiUrl.getCategoriesOnPageLoad
-      );
+      const data = await this.rest.get(environment.apiHost + apiUrl.getCategoriesOnPageLoad);
       data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
       this.source = new LocalDataSource(this.categories);
     } catch (error) {
@@ -84,9 +82,7 @@ export class CategoriesComponent implements OnInit {
         environment.apiHost + apiUrl.createCategory,
         { category: this.newCategory }
       );
-      data['success']
-        ? this.data.success(data['message'])
-        : this.data.error(data['message']);
+      data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
     } catch (error) {
       this.data.error(error['message']);
     }

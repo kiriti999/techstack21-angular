@@ -1,8 +1,21 @@
 <div class="right-rail">
   <div class="right-rail-top">
+
+    <div class="right-rail-dropdown">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"> Select Category </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a *ngFor='let category of categories' class="dropdown-item" (click)='getBlogsByCategory($event)'>{{category.name}}</a>
+        </div>
+      </div>
+    </div>
+
     <div class="right-rail-title">
       Recent posts
     </div>
+
     <div class="right-rail-content">
       <li>
         <a>Node modules version issue with heroku app</a>

@@ -1,15 +1,25 @@
 .right-rail {
-  .right-rail-top,
-  .right-rail-middle {
-    display: grid;
-
-    .right-rail-content li {
-      list-style-type: none;
-      margin: 10px 0;
+    .right-rail-top {
+        button {
+            width: 100%;
+        }
+        .right-rail-title {
+            margin-top: 10px;
+        }
     }
-  }
+    .right-rail-top,
+    .right-rail-middle {
+        display: grid;
+        .right-rail-content li {
+            list-style-type: none;
+            margin: 10px 0;
+        }
+    }
+    .right-rail-middle {
+        margin-top: 50px;
+    }
+}
 
-  .right-rail-middle {
-    margin-top: 50px;
-  }
+#dropdownMenuButton + .dropdown-menu.show {
+    width: 100%;
 }

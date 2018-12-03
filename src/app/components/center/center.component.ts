@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
 import { environment } from '../../../environments/environment';
 import { apiUrl } from '../../api-call-list/api.call.list';
 import { ModalService } from '../../shared-services/modal.service';
+import { SharedService } from '../../shared-services/shared.service';
 
 @Component({
   selector: 'app-center',
@@ -13,8 +14,9 @@ import { ModalService } from '../../shared-services/modal.service';
 export class CenterComponent implements OnInit {
 
   blogs: any;
+  p: any;
 
-  constructor(private data: DataService, private rest: RestApiService, private modal: ModalService) { }
+  constructor(private data: DataService, private rest: RestApiService, private modal: ModalService, private _sharedService: SharedService) { }
 
   async ngOnInit() {
     try {
@@ -25,7 +27,9 @@ export class CenterComponent implements OnInit {
     } catch (error) {
       this.data.error(error['message']);
     }
+    // this._sharedService.getBlogsByCategory().subscribe(blogs => this.blogs = blogs);
   }
+
 
   async onDelete(e) {
     try {

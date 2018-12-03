@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { GlobalLoginService } from '../shared-services/global-login.service';
+import { SharedService } from '../shared-services/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
   private loginUrl = './auth/login';
   private logoutUrl = './auth/logout';
 
-  constructor(private http: HttpClient, private _globalLoginService: GlobalLoginService) { }
+  constructor(private http: HttpClient, private _sharedService: SharedService) { }
 
   login(email: string, password: string) {
     
@@ -26,7 +26,7 @@ export class AuthService {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
 
-                this._globalLoginService.update(true);
+                this._sharedService.update(true);
             }
               return user;
           }));
@@ -38,7 +38,7 @@ export class AuthService {
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
-              this._globalLoginService.update(true);
+              this._sharedService.update(true);
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
