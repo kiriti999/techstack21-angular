@@ -19,14 +19,12 @@ getRouter.get("/logout", logout);
 
 var authList = [];
 
+var mongoose = require('mongoose');
 function getBlogsByCategory(req, res) {
   console.log('category id ', req.params.id);
-  // articleModel.find({"category.$oid": req.params.id}, function(blogs){
-  //   console.log("get blogs by category ", blogs);
-  // });
-
   articleModel
-    .find({"category.$oid": req.params.id})
+    .find({"category":  new mongoose.Types.ObjectId(req.params.id)})
+    .sort({ $natural: -1 })
     .exec(function(err, blogs) {
       if (err) {
         throw err;
@@ -38,59 +36,7 @@ function getBlogsByCategory(req, res) {
         blogs: blogs
       });
     });
-
-  // articleModel
-  //   .find({category: req.params.id})
-  //   .sort({ $natural: -1 })
-  //   .exec(function(err, blogs) {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //     console.log("");
-  //     console.log("get blogs by category ", blogs);
-  //     console.log("");
-  //     res.json({
-  //       success: true,
-  //       message: "blogs by category",
-  //       blogs: blogs
-  //     });
-  //   });
 }
-
-// function getPostByCategory(req, res, next) {
-//     console.log('');
-//     console.log('');
-//     console.log('getPostByCategory name ', req.params.name);
-//     console.log('');
-//     console.log('');
-
-//     articleModel.aggregate([
-//         {
-//             $match: { categories: req.params.name }
-//         },
-//         {
-//             $lookup: {
-//                 from: "category_article_model",
-//                 localField: "_id",
-//                 foreignField: "article_id",
-//                 as: "articlesByCategory"
-//             }
-//         }
-//     ], function (err, articlesByCategory) {
-//         if (err) throw err;
-//         console.log('');
-//         console.log('');
-//         console.log('article by category ', articlesByCategory);
-//         console.log('');
-//         console.log('');
-//         res.json({
-//             success: true,
-//             message: "Success",
-//             blogs: articlesByCategory
-//         });
-//         // return res.send(articlesByCategory);
-//     })
-// }
 
 function createCategory(req, res, next) {
   var category = new categoryModel({
