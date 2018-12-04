@@ -20,20 +20,11 @@ export class CenterComponent implements OnInit {
     private rest: RestApiService,
     private modal: ModalService,
     private _sharedService: SharedService
-  ) {}
+  ) { }
 
   async ngOnInit() {
-    try {
-      const data = await this.rest.get(
-        environment.apiHost + apiUrl['data-on-page-load']
-      );
-      data['success']
-        ? (this.blogs = data['blogs'])
-        : this.data.error('Could not on-load data');
-    } catch (error) {
-      this.data.error(error['message']);
-    }
-    this._sharedService.getBlogsByCategory().subscribe(blogs => {
+    this._sharedService.blogsInitialLoad();
+    this._sharedService.getBlogs().subscribe(blogs => {
       this.blogs = blogs;
     });
   }
@@ -44,7 +35,7 @@ export class CenterComponent implements OnInit {
         environment.apiHost + apiUrl['deleteTopic'] + '/' + e.target.id
       );
       if (data['success']) {
-        this.blogs.forEach(function(v, i, arr) {
+        this.blogs.forEach(function (v, i, arr) {
           if (v._id === data['blogId']) {
             arr.splice(i, 1);
           }

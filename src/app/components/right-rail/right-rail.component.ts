@@ -13,7 +13,7 @@ import { SharedService } from '../../shared-services/shared.service';
 export class RightRailComponent implements OnInit {
 
   categories: any;
-  blogs: [];
+  blogs: any;
 
   constructor(
     private data: DataService,
@@ -28,6 +28,9 @@ export class RightRailComponent implements OnInit {
     } catch (error) {
       this.data.error(error['message']);
     }
+    this._sharedService.getBlogs().subscribe(blogs => {
+      this.blogs = blogs;
+    });
   }
 
   async getBlogsByCategory(e) {

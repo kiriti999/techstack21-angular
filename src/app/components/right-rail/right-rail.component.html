@@ -17,17 +17,8 @@
     </div>
 
     <div class="right-rail-content">
-      <li>
-        <a>Node modules version issue with heroku app</a>
-      </li>
-      <li>
-        <a>Node modules version issue with heroku app</a>
-      </li>
-      <li>
-        <a>Node modules version issue with heroku app</a>
-      </li>
-      <li>
-        <a>Node modules version issue with heroku app</a>
+      <li *ngFor='let blog of blogs | slice:0:5'>
+        <a>{{blog.title}}</a>
       </li>
     </div>
   </div>
