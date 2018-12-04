@@ -33,7 +33,9 @@ export class CenterComponent implements OnInit {
     } catch (error) {
       this.data.error(error['message']);
     }
-    this._sharedService.getBlogsByCategory().subscribe(blogs => this.blogs = blogs);
+    this._sharedService.getBlogsByCategory().subscribe(blogs => {
+      this.blogs = blogs;
+    });
   }
 
   async onDelete(e) {
