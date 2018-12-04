@@ -66,8 +66,6 @@ function new_topic(req, res, next) {
   console.log("creating new article... ", req.body);
   console.log("");
   console.log("");
-  console.log("");
-  console.log("");
 
   var article = new articleModel({
     title: req.body.title,

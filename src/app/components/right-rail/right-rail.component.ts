@@ -32,7 +32,7 @@ export class RightRailComponent implements OnInit {
 
   async getBlogsByCategory(e) {
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl['get_post_by_category']+'/'+e.target.value);
+      const data = await this.rest.get(environment.apiHost + apiUrl['get_post_by_category']+'/'+e.target.id);
       if(data['success']) {
         (this.blogs = data['blogs']);
         this._sharedService.loadBlogs(data['blogs']);

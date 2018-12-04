@@ -7,7 +7,7 @@
           aria-haspopup="true" aria-expanded="false"> Select Category </button>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a *ngFor='let category of categories' class="dropdown-item" (click)='getBlogsByCategory($event)'>{{category.name}}</a>
+          <a *ngFor='let category of categories' id={{category._id}} class="dropdown-item" (click)='getBlogsByCategory($event)'>{{category.name}}</a>
         </div>
       </div>
     </div>
