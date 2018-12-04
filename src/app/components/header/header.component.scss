@@ -18,3 +18,13 @@
         }
     }
 }
+
+.dropdown-toggle {
+  background-color: transparent;
+  box-shadow: none;
+  color: rgba(0, 0, 0, .5);
+}
+
+.dropdown-toggle.active {
+  color: rgba(0, 0, 0, .9);
+}
