@@ -10,7 +10,7 @@ var querystring = require("querystring");
 getRouter.get("/getDataOnScrollEnd/:limit/:offset", getDataOnScrollEnd);
 getRouter.get("/getCategoriesOnPageLoad", getCategoriesOnPageLoad);
 getRouter.get("/createCategory/:name", createCategory);
-getRouter.get("/deleteCategory/:name", deleteCategory);
+getRouter.get("/deleteCategory/:id", deleteCategory);
 getRouter.get("/getDataOnPageLoad", getDataOnPageLoad);
 getRouter.get("/deleteTopic/:deleteId", deleteTopic);
 getRouter.get("/article*", loadByUrl);
@@ -38,7 +38,7 @@ function getBlogsByCategory(req, res) {
     });
 }
 
-function createCategory(req, res, next) {
+function createCategory(req, res) {
   var category = new categoryModel({
     category: req.params.name
   });
@@ -46,15 +46,23 @@ function createCategory(req, res, next) {
   category.save(function(err, newCategory) {
     if (err) throw err;
     console.log("new Category created", newCategory);
-    return res.send(newCategory);
+    res.json({
+      success: true,
+      message: "created category",
+      category: newCategory
+    });
   });
 }
 
-function deleteCategory(req, res, next) {
-  categoryModel.remove({ category: req.params.name }, function(err, category) {
+function deleteCategory(req, res) {
+  categoryModel.remove({ category: req.params.id }, function(err, category) {
     if (err) throw err;
-    console.log("category deleted", req.params.name);
-    return res.sendStatus(200);
+    console.log("category deleted", req.params.id);
+    res.json({
+      success: true,
+      message: "deleted category",
+      category: category
+    });
   });
 }
 

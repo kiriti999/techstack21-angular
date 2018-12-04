@@ -19,9 +19,9 @@ postRouter.post("/update_topic_by_topicId", update_topic);
 postRouter.post("/getLinkedInToken", getLinkedInToken);
 postRouter.post("/createCategory", createCategory);
 
-function createCategory(req, res, next) {
+function createCategory(req, res) {
   let category = new categoryModel();
-  category.name = req.body.category;
+  category.name = req.body.name;
   category.save();
   res.json({
     success: true,

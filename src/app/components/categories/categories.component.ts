@@ -44,21 +44,6 @@ export class CategoriesComponent implements OnInit {
   };
 
   source: LocalDataSource; // add a property to the component
-  arrData: any[] = [
-    {
-      id: 1,
-      name: 'Category 1',
-    },
-    {
-      id: 2,
-      name: 'Category 2',
-    },
-
-    {
-      id: 11,
-      name: 'Category 3',
-    }
-  ];
 
   constructor(
     private data: DataService,
@@ -75,27 +60,27 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  async addCategory() {
-    this.btnDisabled = true;
+  async onCreateConfirm(e) {
+    console.log('create ', e);
+    e.confirm.resolve(e.newData);
     try {
-      const data = await this.rest.post(
-        environment.apiHost + apiUrl.createCategory,
-        { category: this.newCategory }
-      );
+      const data = await this.rest.get(
+        environment.apiHost + apiUrl.createCategory + '/' + e.newData.name);
       data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
     } catch (error) {
       this.data.error(error['message']);
     }
-    this.btnDisabled = false;
   }
 
-  onCreateConfirm(e) {
-    console.log('create ', e);
+  async onDeleteConfirm(e) {
+    console.log('delete ', e);
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl.deleteCategory + '/' + e.newData._id);
+      data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
     e.confirm.resolve(e.newData);
-  }
-
-  onEditConfirm(e) {
-
   }
 
 }
