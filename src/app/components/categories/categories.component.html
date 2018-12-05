@@ -3,6 +3,26 @@
 
 <div class="categories">
   <div class="categories-table">
-    <ng2-smart-table (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)" [settings]="settings" [source]="source" mode="inline"></ng2-smart-table>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th> <input class="form-control" type="text" name="search" [(ngModel)]='searchText' placeholder="Search"> </th>
+            <th> <button class="btn btn-success" (click)="onCreateConfirm($event)">Add new category</button> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories | searchByTitlePipe:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{ category._id }}</td>
+            <td>{{ category.name }}</td>
+            <td><a id="{{category._id}}" class="category-anchor" data-name="{{category.name}}" (click)="onEditConfirm($event)">Edit</a></td>
+            <td><a id="{{category._id}}" class="category-anchor" (click)="onDeleteConfirm($event)">Delete</a></td>
+          </tr>
+        </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </table>
   </div>
 </div>

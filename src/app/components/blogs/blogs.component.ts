@@ -1,5 +1,5 @@
 import { apiUrl } from './../../api-call-list/api.call.list';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';

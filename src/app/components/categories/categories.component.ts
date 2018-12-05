@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
-import { LocalDataSource } from 'ng2-smart-table';
-
+import { ModalService } from '../../shared-services/modal.service';
 
 @Component({
   selector: 'app-categories',
@@ -15,46 +14,21 @@ export class CategoriesComponent implements OnInit {
   categories: any;
   newCategory = '';
   btnDisabled = false;
+  filter: any;
+  searchText: any = '';
+  p: any;
 
-  settings = {
-    pager: {
-      display: true,
-      perPage: 5,
-    },
-    delete: {
-      confirmDelete: true,
-    },
-    add: {
-      confirmCreate: true,
-    },
-    edit: {
-      confirmSave: true,
-    },
-    columns: {
-      _id: {
-        title: 'ID',
-        filter: false,
-        editable: false
-      },
-      name: {
-        title: 'Full Name',
-        placeholder: 'Search by name'
-      }
-    }
-  };
-
-  source: LocalDataSource; // add a property to the component
 
   constructor(
     private data: DataService,
     private rest: RestApiService,
+    private _modalService: ModalService
   ) { }
 
   async ngOnInit() {
     try {
       const data = await this.rest.get(environment.apiHost + apiUrl.getCategoriesOnPageLoad);
       data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
-      this.source = new LocalDataSource(this.categories);
     } catch (error) {
       this.data.error(error['message']);
     }
@@ -62,14 +36,21 @@ export class CategoriesComponent implements OnInit {
 
   async onCreateConfirm(e) {
     console.log('create ', e);
-    e.confirm.resolve(e.newData);
-    try {
-      const data = await this.rest.get(
-        environment.apiHost + apiUrl.createCategory + '/' + e.newData.name);
-      data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
-    } catch (error) {
-      this.data.error(error['message']);
-    }
+    this._modalService.modalOpen(e);
+    // let htmlTag = '<tr> <th scope="row">#</th> <td><input type="text"/></td> <td><input type="text"/></td> </tr>';
+    // $('.table table-striped tbody').prepend(htmlTag);
+    // e.confirm.resolve(e.newData);
+    // try {
+    //   const data = await this.rest.get(
+    //     environment.apiHost + apiUrl.createCategory + '/' + e.newData.title);
+    //   data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
+    // } catch (error) {
+    //   this.data.error(error['message']);
+    // }
+  }
+
+  async onEditConfirm(e) {
+
   }
 
   async onDeleteConfirm(e) {
