@@ -9,14 +9,15 @@ export class ModalService {
 
   modalOpen(e) {
 
-    const trigger = e.target.parentNode.getAttribute('data-modal-trigger');
+    const trigger = e.target.getAttribute('data-modal-trigger');
     const modal = document.querySelector(`[data-modal=${trigger}]`);
     const contentWrapper = modal.querySelector('.content-wrapper');
     const close = modal.querySelector('.close');
+    console.log('e.target ', e.target);
 
-    if (e.target.parentNode.classList[0] === 'blog-update') {
-      modal.querySelector('.modal-header h2').innerHTML = 'Edit blog';
-    }
+    // if (e.target.classList[0] === 'blog-update') {
+    //   modal.querySelector('.modal-header h2').innerHTML = 'Edit blog';
+    // }
 
     close.addEventListener('click', () => modal.classList.remove('open'));
     // modal.addEventListener('click', () => modal.classList.remove('open'));
@@ -29,6 +30,6 @@ export class ModalService {
     const modal = document.querySelector('.modal.open');
     const modalSubmit = modal.querySelector('.modal-submit');
     modalSubmit.addEventListener('click', () => modal.classList.remove('open'));
-    document.querySelector('.modal-header > h2').textContent = 'Create blog';
+    document.querySelector('.modal-header > h2').textContent = 'Create category';
   }
 }

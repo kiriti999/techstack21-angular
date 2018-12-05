@@ -22,10 +22,13 @@ postRouter.post("/createCategory", createCategory);
 function createCategory(req, res) {
   let category = new categoryModel();
   category.name = req.body.name;
-  category.save();
-  res.json({
-    success: true,
-    message: "Successful"
+  category.save(function(err, newCategory) {
+    if (err) throw err;
+    res.json({
+      success: true,
+      message: "Successful",
+      categories: newCategory
+    });
   });
 }
 

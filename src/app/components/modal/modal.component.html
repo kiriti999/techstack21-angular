@@ -1,17 +1,17 @@
 <div data-modal="trigger-1" class="modal">
   <article class="content-wrapper">
     <button class="close"></button>
+
     <header class="modal-header">
-      <h2>Create blog</h2>
-      <p>
-        <input type="text" class='blog-title' #blogTitle/>
-      </p>
+      <h2>Create category</h2>
     </header>
-    <div class="content">
-      <textarea #blogDetails id="edit-blog" rows="15" cols="70" required></textarea>
+
+    <div class="form-group">
+      <input type="text"  #title class="form-control" placeholder="Enter category" required>
     </div>
+
     <footer class="modal-footer">
-      <button class="action modal-submit" type="button" (click)="onBlogSubmit()">Submit</button>
+      <button class="action modal-submit" type="button" (click)="onSubmit()">Submit</button>
     </footer>
   </article>
 </div>

@@ -17,6 +17,7 @@ export class CategoriesComponent implements OnInit {
   filter: any;
   searchText: any = '';
   p: any;
+  newAttribute: any = {};
 
 
   constructor(
@@ -37,6 +38,9 @@ export class CategoriesComponent implements OnInit {
   async onCreateConfirm(e) {
     console.log('create ', e);
     this._modalService.modalOpen(e);
+    // this.categories.unshift(this.newAttribute);
+    // this.newAttribute = {};
+    // this._modalService.modalOpen(e);
     // let htmlTag = '<tr> <th scope="row">#</th> <td><input type="text"/></td> <td><input type="text"/></td> </tr>';
     // $('.table table-striped tbody').prepend(htmlTag);
     // e.confirm.resolve(e.newData);
@@ -50,7 +54,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   async onEditConfirm(e) {
-
+    console.log('edit ', e);
+    this._modalService.modalOpen(e);
   }
 
   async onDeleteConfirm(e) {
