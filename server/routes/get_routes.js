@@ -1,10 +1,6 @@
 const getRouter = require("express").Router();
-// var riot = require('riot');
-var userModel = require("../schemas/user");
 var articleModel = require("../schemas/article");
 var categoryModel = require("../schemas/categories");
-var category_article_model = require("../schemas/category_article_mapping");
-var url = require("url");
 var querystring = require("querystring");
 
 getRouter.get("/getDataOnScrollEnd/:limit/:offset", getDataOnScrollEnd);
@@ -16,8 +12,6 @@ getRouter.get("/deleteTopic/:deleteId", deleteTopic);
 getRouter.get("/article*", loadByUrl);
 getRouter.get("/get_post_by_category/:id", getBlogsByCategory);
 getRouter.get("/logout", logout);
-
-var authList = [];
 
 var mongoose = require('mongoose');
 function getBlogsByCategory(req, res) {

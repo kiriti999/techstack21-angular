@@ -16,6 +16,7 @@ export class BlogsComponent implements OnInit {
   btnDisabled = false;
   filter: any;
   searchText = '';
+  p: any;
 
   constructor(
     private data: DataService,

@@ -74,13 +74,16 @@ export class CategoriesComponent implements OnInit {
 
   async onDeleteConfirm(e) {
     console.log('delete ', e);
+    e.confirm.resolve(e.newData);
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl.deleteCategory + '/' + e.newData._id);
+      console.log('trying...');
+      const data = await this.rest.get(
+        environment.apiHost + apiUrl.deleteCategory + '/' + e.newData._id);
+        console.log('url ', data);
       data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
     } catch (error) {
       this.data.error(error['message']);
     }
-    e.confirm.resolve(e.newData);
   }
 
 }
