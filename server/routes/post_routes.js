@@ -17,20 +17,7 @@ postRouter.post("/createGoogleBloggerPost", createGoogleBloggerPost);
 postRouter.post("/new_topic", new_topic);
 postRouter.post("/update_topic_by_topicId", update_topic);
 postRouter.post("/getLinkedInToken", getLinkedInToken);
-postRouter.post("/createCategory", createCategory);
 
-function createCategory(req, res) {
-  let category = new categoryModel();
-  category.name = req.body.name;
-  category.save(function(err, newCategory) {
-    if (err) throw err;
-    res.json({
-      success: true,
-      message: "Successful",
-      categories: newCategory
-    });
-  });
-}
 
 function getLinkedInToken(req, res, next) {
   var params = {

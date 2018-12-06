@@ -2,27 +2,41 @@
 <app-admin-panel-header></app-admin-panel-header>
 
 <div class="categories">
-  <div class="categories-table">
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th> <input class="form-control" type="text" name="search" [(ngModel)]='searchText' placeholder="Search"> </th>
-            <th> <button class="btn btn-success" data-modal-trigger="trigger-1" (click)="onCreateConfirm($event)">Add new category</button> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let category of categories | searchByTitlePipe:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-            <th scope="row">{{i+1}}</th>
-            <td>{{ category._id }}</td>
-            <td>{{ category.name }}</td>
-            <td><a id="{{category._id}}" class="category-anchor edit" data-name="{{category.name}}" (click)="onEditConfirm($event)">Edit</a></td>
-            <td><a id="{{category._id}}" class="category-anchor" (click)="onDeleteConfirm($event)">Delete</a></td>
-          </tr>
-        </tbody>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-      </table>
-  </div>
+	<div class="categories-table">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">ID</th>
+					<th scope="col">Title</th>
+					<th> <input class="form-control" type="text" name="search" [(ngModel)]='searchText' placeholder="Search"> </th>
+					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="addInput" (click)="onAddInput($event)">Add
+							new category</button> </th>
+					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="cancelCategory" (click)="onCancel($event)">Cancel</button>
+					</th>
+					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="saveCategory" (click)="onSave(categoryName)">Save</button>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let category of categories | searchByTitlePipe:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+					<th scope="row">{{i+1}}</th>
+
+					<td>
+						<input *ngIf="category.isNew" type="text" class="form-control" [(ngModel)]="category['_id']" [disabled]="!isDisabled" />
+						<span *ngIf="!category.isNew" >{{category['_id']}}</span>
+					</td>
+
+					<td>
+						<input *ngIf="category.isNew" type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
+						<span *ngIf="!category.isNew" >{{category['name']}}</span>
+					</td>
+					
+					<td><a id="{{category._id}}" class="category-anchor edit" data-name="{{category.name}}" (click)="onEdit($event)">Edit</a></td>
+					<td><a id="{{category._id}}" class="category-anchor" (click)="onDelete($event)">Delete</a></td>
+				</tr>
+			</tbody>
+			<pagination-controls (pageChange)="p = $event"></pagination-controls>
+		</table>
+	</div>
 </div>

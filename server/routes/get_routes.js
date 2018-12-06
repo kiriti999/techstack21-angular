@@ -37,13 +37,13 @@ function createCategory(req, res) {
     category: req.params.name
   });
 
-  category.save(function(err, newCategory) {
+  category.save(function(err, savedCategory) {
     if (err) throw err;
-    console.log("new Category created", newCategory);
+    console.log("new Category created", savedCategory);
     res.json({
       success: true,
       message: "created category",
-      category: newCategory
+      newCategory: savedCategory
     });
   });
 }

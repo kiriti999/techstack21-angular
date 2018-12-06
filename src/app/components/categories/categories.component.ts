@@ -1,5 +1,5 @@
 import { apiUrl } from './../../api-call-list/api.call.list';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
@@ -12,13 +12,13 @@ import { ModalService } from '../../shared-services/modal.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: any;
-  newCategory = '';
-  btnDisabled = false;
-  filter: any;
+  isDisabled = true;
   searchText: any = '';
-  p: any;
-  newAttribute: any = {};
-
+  newAttribute: any = {
+    isNew:true,
+    _id:'',
+    name:''
+  };
 
   constructor(
     private data: DataService,
@@ -35,9 +35,15 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  async onCreateConfirm(e) {
+  async onAddInput(e) {
     console.log('create ', e);
-    this._modalService.modalOpen(e);
+    this.isDisabled = false;
+    this.categories.unshift(this.newAttribute);
+    document.getElementById('addInput').style.display = 'none';
+    document.getElementById('cancelCategory').style.display = 'block';
+    document.getElementById('saveCategory').style.display = 'block';
+
+    // this._modalService.modalOpen(e);
     // this.categories.unshift(this.newAttribute);
     // this.newAttribute = {};
     // this._modalService.modalOpen(e);
@@ -53,12 +59,40 @@ export class CategoriesComponent implements OnInit {
     // }
   }
 
-  async onEditConfirm(e) {
+  onCancel(e) {
+    document.getElementById('addInput').style.display = 'block';
+    document.getElementById('cancelCategory').style.display = 'none';
+    document.getElementById('saveCategory').style.display = 'none';
+    this.categories.shift(this.newAttribute);
+    this.newAttribute = {};
+  }
+
+  async onSave(e) {
+    document.getElementById('addInput').style.display = 'block';
+    document.getElementById('cancelCategory').style.display = 'none';
+    document.getElementById('saveCategory').style.display = 'none';
+    console.log('save ', this.categories[0].name);
+    if(this.categories[0].isNew && typeof this.categories[0].isNew !== 'undefined') {
+       try {
+        const data = await this.rest.get(environment.apiHost + apiUrl.createCategory + '/' + this.categories[0].name);
+        if(data['success']) {
+          console.log('success ', data['newCategory'])
+          // (this.categories = data['categories'])
+        } else {
+          this.data.error(data['message']);
+        }
+      } catch (error) {
+        this.data.error(error['message']);
+      }
+    }
+  }
+
+  async onEdit(e) {
     console.log('edit ', e);
     this._modalService.modalOpen(e);
   }
 
-  async onDeleteConfirm(e) {
+  async onDelete(e) {
     console.log('delete ', e);
     e.confirm.resolve(e.newData);
     try {
