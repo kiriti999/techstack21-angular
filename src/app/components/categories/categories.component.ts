@@ -15,21 +15,25 @@ export class CategoriesComponent implements OnInit {
   isDisabled = true;
   searchText: any = '';
   newAttribute: any = {
-    isNew:true,
-    _id:'',
-    name:''
+    isNew: true,
+    _id: '',
+    name: ''
   };
 
   constructor(
     private data: DataService,
     private rest: RestApiService,
     private _modalService: ModalService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl.getCategoriesOnPageLoad);
-      data['success'] ? (this.categories = data['categories']) : this.data.error(data['message']);
+      const data = await this.rest.get(
+        environment.apiHost + apiUrl.getCategoriesOnPageLoad
+      );
+      data['success']
+        ? (this.categories = data['categories'])
+        : this.data.error(data['message']);
     } catch (error) {
       this.data.error(error['message']);
     }
@@ -71,18 +75,28 @@ export class CategoriesComponent implements OnInit {
     document.getElementById('addInput').style.display = 'block';
     document.getElementById('cancelCategory').style.display = 'none';
     document.getElementById('saveCategory').style.display = 'none';
-    console.log('save ', this.categories[0].name);
-    if(this.categories[0].isNew && typeof this.categories[0].isNew !== 'undefined') {
-       try {
-        const data = await this.rest.get(environment.apiHost + apiUrl.createCategory + '/' + this.categories[0].name);
-        if(data['success']) {
-          console.log('success ', data['newCategory'])
-          // (this.categories = data['categories'])
+    if (
+      this.categories[0].isNew &&
+      typeof this.categories[0].isNew !== 'undefined'
+    ) {
+      try {
+        const data = await this.rest.get(
+          environment.apiHost +
+            apiUrl.createCategory +
+            '/' +
+            this.categories[0].name
+        );
+        if (data['success']) {
+          console.log('success ', data['newCategory']);
+          this.categories.push(data['newCategory']);
         } else {
           this.data.error(data['message']);
         }
       } catch (error) {
         this.data.error(error['message']);
+      } finally {
+        this.categories.shift(this.newAttribute);
+        this.newAttribute = {};
       }
     }
   }
@@ -94,16 +108,21 @@ export class CategoriesComponent implements OnInit {
 
   async onDelete(e) {
     console.log('delete ', e);
-    e.confirm.resolve(e.newData);
     try {
-      console.log('trying...');
       const data = await this.rest.get(
-        environment.apiHost + apiUrl.deleteCategory + '/' + e.newData._id);
-        console.log('url ', data);
-      data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
+        environment.apiHost + apiUrl.deleteCategory + '/' + e.target.id
+      );
+      if (data['success']) {
+        this.categories.forEach(function(v, i, arr) {
+          if (v._id === data['deletedCategory']._id) {
+            arr.splice(i, 1);
+          }
+        });
+      } else {
+        this.data.error(data['message']);
+      }
     } catch (error) {
       this.data.error(error['message']);
     }
   }
-
 }

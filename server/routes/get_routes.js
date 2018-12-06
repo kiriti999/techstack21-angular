@@ -33,8 +33,9 @@ function getBlogsByCategory(req, res) {
 }
 
 function createCategory(req, res) {
+  console.log('req.params.name ', req.params.name);
   var category = new categoryModel({
-    category: req.params.name
+    name: req.params.name
   });
 
   category.save(function(err, savedCategory) {
@@ -49,13 +50,13 @@ function createCategory(req, res) {
 }
 
 function deleteCategory(req, res) {
-  categoryModel.remove({ category: req.params.id }, function(err, category) {
+  categoryModel.findOneAndRemove({ _id: req.params.id }, function(err, deleted) {
     if (err) throw err;
     console.log("category deleted", req.params.id);
     res.json({
       success: true,
       message: "deleted category",
-      category: category
+      deletedCategory: deleted
     });
   });
 }

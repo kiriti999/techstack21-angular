@@ -14,7 +14,7 @@
 							new category</button> </th>
 					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="cancelCategory" (click)="onCancel($event)">Cancel</button>
 					</th>
-					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="saveCategory" (click)="onSave(categoryName)">Save</button>
+					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="saveCategory" (click)="onSave($event)">Save</button>
 					</th>
 				</tr>
 			</thead>
@@ -31,7 +31,7 @@
 						<input *ngIf="category.isNew" type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
 						<span *ngIf="!category.isNew" >{{category['name']}}</span>
 					</td>
-					
+
 					<td><a id="{{category._id}}" class="category-anchor edit" data-name="{{category.name}}" (click)="onEdit($event)">Edit</a></td>
 					<td><a id="{{category._id}}" class="category-anchor" (click)="onDelete($event)">Delete</a></td>
 				</tr>
