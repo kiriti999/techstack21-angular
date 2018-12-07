@@ -4,6 +4,7 @@ export const apiUrl = {
     'new_topic' : 'new_topic',
     'deleteTopic': 'deleteTopic',
     'createCategory' : 'createCategory',
+    'editCategory' :'editCategory',
     'deleteCategory' : 'deleteCategory',
     'getCategoriesOnPageLoad' : 'getCategoriesOnPageLoad',
     'update_topic_by_topicId' : 'update_topic_by_topicId',

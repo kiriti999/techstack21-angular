@@ -28,12 +28,13 @@
 					</td>
 
 					<td>
-						<input *ngIf="category.isNew" type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
-						<span *ngIf="!category.isNew" >{{category['name']}}</span>
+						<input *ngIf="category.isNew || !isDisabled" id="categoryName" type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
+						<span *ngIf="!category.isNew && isDisabled" >{{category['name']}}</span>
 					</td>
 
-					<td><a id="{{category._id}}" class="category-anchor edit" data-name="{{category.name}}" (click)="onEdit($event)">Edit</a></td>
-					<td><a id="{{category._id}}" class="category-anchor" (click)="onDelete($event)">Delete</a></td>
+					<td *ngIf="!category.isNew && isDisabled"><a id="{{category._id}}" class="category-anchor edit" (click)="onEdit($event)">Edit</a></td>
+					<td *ngIf="category.isNew || !isDisabled" ><a id="{{category._id}}" class="category-anchor edit-save" (click)="onEditSave($event)">Save</a></td>
+					<td><a id="{{category._id}}" class="category-anchor delete" (click)="onDelete($event)">Delete</a></td>
 				</tr>
 			</tbody>
 			<pagination-controls (pageChange)="p = $event"></pagination-controls>

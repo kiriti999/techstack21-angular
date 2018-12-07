@@ -46,21 +46,6 @@ export class CategoriesComponent implements OnInit {
     document.getElementById('addInput').style.display = 'none';
     document.getElementById('cancelCategory').style.display = 'block';
     document.getElementById('saveCategory').style.display = 'block';
-
-    // this._modalService.modalOpen(e);
-    // this.categories.unshift(this.newAttribute);
-    // this.newAttribute = {};
-    // this._modalService.modalOpen(e);
-    // let htmlTag = '<tr> <th scope="row">#</th> <td><input type="text"/></td> <td><input type="text"/></td> </tr>';
-    // $('.table table-striped tbody').prepend(htmlTag);
-    // e.confirm.resolve(e.newData);
-    // try {
-    //   const data = await this.rest.get(
-    //     environment.apiHost + apiUrl.createCategory + '/' + e.newData.title);
-    //   data['success'] ? this.data.success(data['message']) : this.data.error(data['message']);
-    // } catch (error) {
-    //   this.data.error(error['message']);
-    // }
   }
 
   onCancel(e) {
@@ -103,7 +88,32 @@ export class CategoriesComponent implements OnInit {
 
   async onEdit(e) {
     console.log('edit ', e);
-    this._modalService.modalOpen(e);
+    this.isDisabled = false;
+    this.newAttribute.isNew = true;    
+  }
+
+  async onEditSave(e) {
+    console.log('e ', e.target.id);
+    console.log('edit save ', document.getElementById('categoryName').value);
+    let categoryName = document.getElementById('categoryName').value;
+    try {
+      const data = await this.rest.get(environment.apiHost + apiUrl.editCategory + '/' + e.target.id + '/' + categoryName);
+      if (data['success']) {
+        this.categories.forEach(function(v, i, arr) {
+          if (v._id === data['updatedCategory']._id) {
+            arr[i].name = data['updatedCategory'].name
+          }
+        });
+      } else {
+        this.data.error(data['message']);
+      }
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+    finally {
+      this.isDisabled = true;
+      this.newAttribute.isNew = false;    
+    }
   }
 
   async onDelete(e) {

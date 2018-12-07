@@ -6,6 +6,7 @@ var querystring = require("querystring");
 getRouter.get("/getDataOnScrollEnd/:limit/:offset", getDataOnScrollEnd);
 getRouter.get("/getCategoriesOnPageLoad", getCategoriesOnPageLoad);
 getRouter.get("/createCategory/:name", createCategory);
+getRouter.get("/editCategory/:id/:name", editCategory);
 getRouter.get("/deleteCategory/:id", deleteCategory);
 getRouter.get("/getDataOnPageLoad", getDataOnPageLoad);
 getRouter.get("/deleteTopic/:deleteId", deleteTopic);
@@ -45,6 +46,18 @@ function createCategory(req, res) {
       success: true,
       message: "created category",
       newCategory: savedCategory
+    });
+  });
+}
+function editCategory(req, res) {
+  console.log('category update ', req.params.id);
+  
+  categoryModel.findOneAndUpdate({_id: req.params.id}, {name: req.params.name}, {new: true}, function(err, editedCategory){
+    if(err) throw err;
+    res.json({
+      success: true,
+      message: "Successful",
+      updatedCategory: editedCategory
     });
   });
 }

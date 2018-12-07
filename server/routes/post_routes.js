@@ -98,22 +98,16 @@ function update_topic(req, res, next) {
       if (err) throw err;
       console.log(" ");
       console.log(" ");
-      console.log(" ");
       console.log("article updated", updatedArticle._id);
-      console.log(" ");
-      console.log(" ");
       console.log(" ");
       console.log(" ");
       console.log("calling unescape on article ", updatedArticle);
       console.log(" ");
       console.log(" ");
-      console.log(" ");
       unescapeArticle(updatedArticle);
       console.log(" ");
       console.log(" ");
-      console.log(" ");
       console.log("checking if unescaped ", updatedArticle);
-      console.log(" ");
       console.log(" ");
       console.log(" ");
 
