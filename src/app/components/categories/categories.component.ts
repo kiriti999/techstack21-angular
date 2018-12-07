@@ -13,6 +13,7 @@ import { ModalService } from '../../shared-services/modal.service';
 export class CategoriesComponent implements OnInit {
   categories: any;
   isDisabled = true;
+  isEdit = false;
   searchText: any = '';
   newAttribute: any = {
     isNew: true,
@@ -53,7 +54,11 @@ export class CategoriesComponent implements OnInit {
     document.getElementById('cancelCategory').style.display = 'none';
     document.getElementById('saveCategory').style.display = 'none';
     this.categories.shift(this.newAttribute);
-    this.newAttribute = {};
+  }
+
+  onCancelEdit(e) {
+    this.isDisabled = true;
+    this.isEdit = false;
   }
 
   async onSave(e) {
@@ -89,19 +94,19 @@ export class CategoriesComponent implements OnInit {
   async onEdit(e) {
     console.log('edit ', e);
     this.isDisabled = false;
-    this.newAttribute.isNew = true;    
+    this.isEdit = true;
   }
 
   async onEditSave(e) {
     console.log('e ', e.target.id);
-    console.log('edit save ', document.getElementById('categoryName').value);
-    let categoryName = document.getElementById('categoryName').value;
+    // console.log('edit save ', document.getElementById('categoryName').value);
+    const categoryName = document.getElementById('categoryName').value;
     try {
       const data = await this.rest.get(environment.apiHost + apiUrl.editCategory + '/' + e.target.id + '/' + categoryName);
       if (data['success']) {
         this.categories.forEach(function(v, i, arr) {
           if (v._id === data['updatedCategory']._id) {
-            arr[i].name = data['updatedCategory'].name
+            arr[i].name = data['updatedCategory'].name;
           }
         });
       } else {
@@ -112,7 +117,7 @@ export class CategoriesComponent implements OnInit {
     }
     finally {
       this.isDisabled = true;
-      this.newAttribute.isNew = false;    
+      this.newAttribute.isNew = false;
     }
   }
 

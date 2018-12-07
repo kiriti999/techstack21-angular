@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let blog of blogs | searchByTitlePipe:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+      <tr *ngFor="let blog of blogs | blogSearchPipe:searchText | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{ blog._id }}</td>
         <td>{{ blog.title }}</td>

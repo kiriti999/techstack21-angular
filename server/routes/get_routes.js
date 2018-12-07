@@ -50,8 +50,8 @@ function createCategory(req, res) {
   });
 }
 function editCategory(req, res) {
-  console.log('category update ', req.params.id);
-  
+ole.log('category update ', req.params.id);
+
   categoryModel.findOneAndUpdate({_id: req.params.id}, {name: req.params.name}, {new: true}, function(err, editedCategory){
     if(err) throw err;
     res.json({

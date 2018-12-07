@@ -10,7 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
+import { BlogSearchPipe } from './pipes/blog-search.pipe';
+import { CategorySearchPipe } from './pipes/category-search.pipe';
 
 
 import { AppComponent } from './app.component';
@@ -52,7 +53,8 @@ import { BlogEditPageComponent } from './components/blog-edit-page/blog-edit-pag
     UsersComponent,
     BlogsComponent,
     BlogEditPageComponent,
-    SearchByTitlePipe
+    BlogSearchPipe,
+    CategorySearchPipe
   ],
   imports: [
     BrowserModule,
