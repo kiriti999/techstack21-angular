@@ -6,6 +6,7 @@
     align-items: center;
     .menu-item {
         list-style-type: none;
+        cursor: pointer;
         a {
             color: rgba(0, 0, 0, .5);
             text-decoration: none;
