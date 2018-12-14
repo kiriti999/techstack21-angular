@@ -15,6 +15,7 @@ export class CategoriesComponent implements OnInit {
   isDisabled = true;
   isEdit = false;
   searchText: any = '';
+  p: any;
   @ViewChild('categoryName') categoryName: ElementRef;
   newAttribute: any = {
     isNew: true,
@@ -24,8 +25,7 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private data: DataService,
-    private rest: RestApiService,
-    private _modalService: ModalService
+    private rest: RestApiService    
   ) {}
 
   async ngOnInit() {
