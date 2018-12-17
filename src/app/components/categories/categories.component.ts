@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
-import { ModalService } from '../../shared-services/modal.service';
 
 @Component({
   selector: 'app-categories',
@@ -23,10 +22,7 @@ export class CategoriesComponent implements OnInit {
     name: ''
   };
 
-  constructor(
-    private data: DataService,
-    private rest: RestApiService    
-  ) {}
+  constructor(private data: DataService, private rest: RestApiService) {}
 
   async ngOnInit() {
     try {
@@ -100,7 +96,6 @@ export class CategoriesComponent implements OnInit {
 
   async onEditSave(e) {
     console.log('e ', e.target.id);
-    // console.log('edit save ', document.getElementById('categoryName').value);
     const categoryName = this.categoryName.nativeElement.value;
 
     try {
