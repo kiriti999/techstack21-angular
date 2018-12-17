@@ -57,7 +57,8 @@ import { BlogEditPageComponent } from './components/blog-edit-page/blog-edit-pag
     CategorySearchPipe
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
+    BrowserModule.withServerTransition({appId: 'my-app'}),
     AppRoutingModule,
     HttpClientModule,
     NgSelectModule,
