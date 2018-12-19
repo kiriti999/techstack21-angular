@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared-services/shared.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   private loginUrl = './auth/login';
   private logoutUrl = './auth/logout';
 
-  constructor(private http: HttpClient, private _sharedService: SharedService) { }
+  constructor(private http: HttpClient, private _sharedService: SharedService, private router: Router) { }
 
   login(email: string, password: string) {
     
@@ -51,7 +52,9 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.get(this.logoutUrl);
+    localStorage.removeItem('currentUser');
+    this._sharedService.update(false);
+    this.router.navigate(['/']);
   }
 
 }

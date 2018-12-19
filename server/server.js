@@ -10,18 +10,6 @@ var cookieSession = require('cookie-session');
 var passport = require('passport');
 var logger = require('morgan');
 
-
-
-var ngExpressEngine = require('@nguniversal/express-engine');
-const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
-var join = require('path');
-var readFileSync = require('fs');
-
-require('reflect-metadata');
-require('zone.js/dist/zone-node');
-var renderModuleFactory = require('@angular/platform-server');
-var enableProdMode = require('@angular/core');
-
 //imports
 var compression = require('compression');
 var keys = require('./config/auth_keys');
@@ -71,56 +59,15 @@ var config = require('../server/config/config.json').props;
 var port = process.env.PORT || config.server_port;
 
 app.set('port', (port));
-const DIST_FOLDER = join(process.cwd(), 'dist');
 
-// Our index.html we'll use as our template
-const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();
-
-// * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main.bundle');
-
-enableProdMode();
-
-// Set the engine
-app.engine(
-    'html',
-    ngExpressEngine({
-        bootstrap: AppServerModuleNgFactory,
-        providers: [provideModuleMap(LAZY_MODULE_MAP)]
-    })
-);
-
-app.set('view engine', 'html');
-app.get('/**/*', (req, res) => {
-    res.render(join(DIST_FOLDER, 'techstack21-angular', 'index'), {
-        req,
-        res
-    });
-});
-app.set('views', join(DIST_FOLDER, 'techstack21-angular'));
-// Server static files from /browser
-app.get('*.*', express.static(join(DIST_FOLDER, 'techstack21-angular')));
-
-// All regular routes use the Universal engine
-// Point all routes to Universal
-app.get('*', (req, res) => {
-    res.render('index', { req });
-  });
-  
-
-// Start up the Node server
-app.listen(app.get('port'), () => {
+app.use(express.static(path.join(__dirname, '../dist')));
+app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
 });
 
-// app.use(express.static(path.join(__dirname, '../dist')));
-// app.listen(app.get('port'), function () {
-//     console.log('Node app is running on port', app.get('port'));
-// });
-
-// app.get('/', function (request, response) {
-//     response.sendFile(path.join(__dirname, '../dist/index.html'));
-// });
+app.get('/', function (request, response) {
+    response.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 //global error logger
 app.use(function (err, req, res, next) {

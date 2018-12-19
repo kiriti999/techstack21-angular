@@ -12,10 +12,10 @@ export class SharedService {
 
   private blogs = new ReplaySubject();
 
-  globalLogin$: Subject<any>;
+  globalLogin$: ReplaySubject<any>;
 
   constructor(private data: DataService, private rest: RestApiService) {
-    this.globalLogin$ = new Subject();
+    this.globalLogin$ = new ReplaySubject();
   }
 
   update(loggedIn) {

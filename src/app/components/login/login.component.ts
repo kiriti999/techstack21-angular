@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   user: any = {};
 
   constructor(
-    @Inject(DOCUMENT) private document: any,
     private _authService: AuthService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -34,9 +33,6 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    // reset login status
-    this._authService.logout();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
