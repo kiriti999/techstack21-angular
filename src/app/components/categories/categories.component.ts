@@ -94,6 +94,10 @@ export class CategoriesComponent implements OnInit {
 
   async onEditSave(e) {
     console.log('e ', e.target.id);
+<<<<<<< HEAD
+=======
+    // console.log('edit save ', document.getElementById('categoryName').value);
+>>>>>>> parent of e3bc019... login fix
     const categoryName = document.getElementById('categoryName').value;
     try {
       const data = await this.rest.get(environment.apiHost + apiUrl.editCategory + '/' + e.target.id + '/' + categoryName);
