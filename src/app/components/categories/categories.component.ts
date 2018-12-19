@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
-import { ModalService } from '../../shared-services/modal.service';
 
 @Component({
   selector: 'app-categories',
@@ -21,11 +20,7 @@ export class CategoriesComponent implements OnInit {
     name: ''
   };
 
-  constructor(
-    private data: DataService,
-    private rest: RestApiService,
-    private _modalService: ModalService
-  ) {}
+  constructor(private data: DataService, private rest: RestApiService) {}
 
   async ngOnInit() {
     try {
@@ -99,7 +94,6 @@ export class CategoriesComponent implements OnInit {
 
   async onEditSave(e) {
     console.log('e ', e.target.id);
-    // console.log('edit save ', document.getElementById('categoryName').value);
     const categoryName = document.getElementById('categoryName').value;
     try {
       const data = await this.rest.get(environment.apiHost + apiUrl.editCategory + '/' + e.target.id + '/' + categoryName);
