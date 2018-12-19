@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedService } from '../../shared-services/shared.service';
-import { ModalService } from '../../shared-services/modal.service';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,26 +11,24 @@ export class HeaderComponent implements OnInit {
 
   loggedIn = false;
 
-  constructor(private _sharedService: SharedService, private modal: ModalService) {
+  constructor(private _sharedService: SharedService, private _authService: AuthService) {
 
   }
 
   ngOnInit() {
     const userId = ((JSON.parse(localStorage.getItem('currentUser')) || {}).user || {}).id;
-    if (typeof userId === 'undefined' || userId == null) {
       this._sharedService.globalLogin$.subscribe((value) => {
+        console.log('logged in ', value);
         this.loggedIn = value;
       });
-    } else {
-      this.loggedIn = true;
-    }
   }
 
-  /**
-  Opens modal
-  @param {event} event - Event passed from click
- */
-  modalOpen(e) {
-    this.modal.modalOpen(e);
+  logout(e) { 
+    this._authService.logout();
   }
+
+  OnDestroy() {
+    this._sharedService.globalLogin$.unsubscribe();
+  }
+
 }
