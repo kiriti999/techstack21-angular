@@ -10,6 +10,7 @@
 					<th scope="col">ID</th>
 					<th scope="col">Title</th>
 					<th> <input class="form-control" type="text" name="search" [(ngModel)]='searchText' placeholder="Search"> </th>
+
 					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="addInput" (click)="onAddInput($event)">Add
 							new category</button> </th>
 					<th> <button class="btn btn-success" data-modal-trigger="trigger-1" id="cancelCategory" (click)="onCancel($event)">Cancel</button>
@@ -29,7 +30,7 @@
 
 					<td>
 						<input *ngIf="category.isNew" type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
-						<input *ngIf="isEdit" id="categoryName" #categoryName type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
+						<input *ngIf="isEdit" id="categoryName" type="text" class="form-control" [(ngModel)]="category['name']" [disabled]="isDisabled" />
 						<span *ngIf="!category.isNew && !isEdit" >{{category['name']}}</span>
 					</td>
 

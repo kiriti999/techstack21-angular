@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared-services/shared.service';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +14,15 @@ export class AuthService {
   private loginUrl = './auth/login';
   private logoutUrl = './auth/logout';
 
-  constructor(private http: HttpClient, private _sharedService: SharedService, private router: Router) { }
+  constructor(private http: HttpClient, private _sharedService: SharedService) { }
 
   login(email: string, password: string) {
-
+    
     return this.http.post<any>(this.loginUrl, { email, password: (window.btoa(password)) })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
-
+              
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
 
@@ -34,7 +33,7 @@ export class AuthService {
   }
 
   signup(email: string, password: string) {
-
+    
     return this.http.post<any>(this.signupUrl, { email, password: (window.btoa(password)) })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response
@@ -52,9 +51,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
-    this._sharedService.update(false);
-    this.router.navigate(['/']);
+    return this.http.get(this.logoutUrl);
   }
 
 }

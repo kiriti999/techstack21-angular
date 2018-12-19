@@ -213,6 +213,6 @@
     <li class="menu-item"><a [routerLinkActive]="['active']" routerLink="/jquery">JQuery</a></li>
   -->
   <li class="menu-item" *ngIf="loggedIn">
-    <a [routerLinkActive]="['active']" (click)="logout($event)">Logout</a>
+    <a [routerLinkActive]="['active']" routerLink="/logout">Logout</a>
   </li>
 </div>

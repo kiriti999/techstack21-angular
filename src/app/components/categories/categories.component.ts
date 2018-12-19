@@ -1,5 +1,5 @@
 import { apiUrl } from './../../api-call-list/api.call.list';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RestApiService } from '../../services/rest-api.service';
 import { DataService } from '../../services/data.service';
@@ -15,7 +15,6 @@ export class CategoriesComponent implements OnInit {
   isDisabled = true;
   isEdit = false;
   searchText: any = '';
-  @ViewChild('categoryName') categoryName: ElementRef;
   newAttribute: any = {
     isNew: true,
     _id: '',
@@ -101,8 +100,7 @@ export class CategoriesComponent implements OnInit {
   async onEditSave(e) {
     console.log('e ', e.target.id);
     // console.log('edit save ', document.getElementById('categoryName').value);
-    const categoryName = this.categoryName.nativeElement.value;
-
+    const categoryName = document.getElementById('categoryName').value;
     try {
       const data = await this.rest.get(environment.apiHost + apiUrl.editCategory + '/' + e.target.id + '/' + categoryName);
       if (data['success']) {

@@ -12,10 +12,10 @@ export class SharedService {
 
   private blogs = new ReplaySubject();
 
-  globalLogin$: ReplaySubject<any>;
+  globalLogin$: Subject<any>;
 
   constructor(private data: DataService, private rest: RestApiService) {
-    this.globalLogin$ = new ReplaySubject();
+    this.globalLogin$ = new Subject();
   }
 
   update(loggedIn) {
@@ -28,7 +28,7 @@ export class SharedService {
 
   async blogsInitialLoad() {
     try {
-      const data = await this.rest.get(environment.apiHost + apiUrl['data-on-page-load']);
+      const data = await this.rest.get(environment.apiHost + apiUrl["data-on-page-load"]);
       if (data['success']) {
         this.blogs.next(data['blogs']);
       } else {
