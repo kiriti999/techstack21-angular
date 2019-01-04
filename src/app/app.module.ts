@@ -58,7 +58,7 @@ import { BlogEditPageComponent } from './components/blog-edit-page/blog-edit-pag
   ],
   imports: [
     // BrowserModule,
-    BrowserModule.withServerTransition({appId: 'my-app'}),
+    BrowserModule.withServerTransition({appId: 'techstack21-angular'}),
     AppRoutingModule,
     HttpClientModule,
     NgSelectModule,
