@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('../../dist/main.js');
 
 // import { AppServerModuleNgFactory, LAZY_MODULE_MAP } from '../../dist/server/main';
 
@@ -35,7 +35,7 @@ app.engine('html', ngExpressEngine({
 }));
 
 app.set('view engine', 'html');
-app.set('views', join(DIST_FOLDER, 'browser'));
+app.set('views', join(DIST_FOLDER, 'techstack21-angular'));
 
 // TODO: implement data requests securely
 app.get('/api/*', (req, res) => {
@@ -43,7 +43,7 @@ app.get('/api/*', (req, res) => {
 });
 
 // Server static files from /browser
-app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
+app.get('*.*', express.static(join(DIST_FOLDER, 'techstack21-angular')));
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {

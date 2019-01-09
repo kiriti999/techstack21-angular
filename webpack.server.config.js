@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const APP_NAME = 'techstack21-angular';
 
 module.exports = {
-  entry: { server: './server.ts' },
+  entry: { server: './src/app/server.ts' },
   resolve: { extensions: ['.js', '.ts'] },
   mode: 'none',
   target: 'node',

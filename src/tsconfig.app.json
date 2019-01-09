@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
 "compilerOptions": {
-  "outDir": "../dist",
+  "outDir": "../dist/techstack21-angular",
   "module": "es2015",
   "types": ["node"],
   "typeRoots": [

@@ -4,7 +4,7 @@
       "outDir": "../dist",
       "baseUrl": "./",
       "module": "commonjs",
-      "types": ["node"],
+      "types": ["node", "mocha"],
       "typeRoots": [
         "node_modules/@types"
       ],
